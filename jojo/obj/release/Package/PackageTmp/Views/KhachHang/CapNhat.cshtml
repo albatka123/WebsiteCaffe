@@ -1,0 +1,117 @@
+﻿@using jojo.Models
+@{
+    Layout = null;
+    khachhang a = ViewBag.khachhang as khachhang;
+    nhanvien nv = ViewBag.nhanvien as nhanvien;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="/image/jojo.ico">
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <title>CapNhat</title>
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('form').submit(function () {
+
+                var ten = $('#ten').val();
+                var sdt = $('#sdt').val();
+
+                if (ten == "") {
+                    alert("Tên khách hàng không được để trống");
+                    return false;
+                }
+
+                if (sdt == "") {
+                    alert("Số điện thoại khách hàng không được để trống");
+                    return false;
+                }
+
+            });
+
+        });
+
+        function Xoa(id) {
+            var r = confirm("Bạn có chắc muốn xóa");
+            if (r == true) {
+                window.location = "/KhachHang/Xoa?id=" + id;
+            }
+        }
+    </script>
+   
+</head>
+<body>
+    @RenderPage("/Views/Share/nav_quanly.cshtml")
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-offset-3 col-sm-6">
+
+                <form class="form-horizontal" method="post" action="/KhachHang/CapNhat2">
+                    <input type="hidden" class="form-control" name="id" value="@a.id">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Họ và tên</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="tenkhachhang" value="@a.tenkhachhang" id="ten">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Số điện thoại</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="sodienthoai" value="@a.sodienthoai" id="sdt">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Địa chỉ</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="diachi" value="@a.diachi">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Email</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="email" value="@a.email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Ghi chú</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="ghichu">@a.ghichu</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Trạng thái</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="trangthai">
+                                @if (a.trangthai == "Đã cập nhật")
+                                {
+                                    <option value="Đã cập nhật" selected>Đã cập nhật</option>
+                                    <option value="Chưa cập nhật">Chưa cập nhật</option>
+                                }
+                                else
+                                {
+                                    <option value="Đã cập nhật">Đã cập nhật</option>
+                                    <option value="Chưa cập nhật" selected>Chưa cập nhật</option>
+                                }
+
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="submit" class="btn btn-default">Cập Nhật</button>
+                            <input type="button" class="btn btn-default" value="Xóa" onclick="return Xoa('@a.id')" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @RenderPage("/Views/Share/footer.cshtml")
+</body>
+</html>

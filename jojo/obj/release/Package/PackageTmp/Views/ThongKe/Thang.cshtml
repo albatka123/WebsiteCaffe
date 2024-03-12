@@ -1,0 +1,61 @@
+﻿@using jojo.Models;
+@model jojo.DTO.TradingModel
+@{
+    Layout = null;
+    nhanvien nv = ViewBag.nhanvien as nhanvien;
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="/image/jojo.ico">
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <title>ThongKe</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+    google.load("visualization", "1", { packages: ["corechart"] });
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        // Create and populate the data table.
+        var years = [@Model.ProductData.Year];
+        var sales = [@Model.ProductData.DoanhThus];
+        var Purchase = [@Model.ProductData.ChiPhis];
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', '@Model.YearTitle');
+        data.addColumn('number', '@Model.DoanhThuTitle');
+        data.addColumn('number', '@Model.ChiPhiTitle');
+        for (i = 0; i < years.length; i++) {
+            data.addRow([years[i].toString(), sales[i], Purchase[i]]);
+        }
+        var options = {
+            title: 'Thống kê doanh thu & chi phí trong năm hiện tại',
+            legend: 'bottom',
+            hAxis: { title: '@Model.YearTitle', titleTextStyle: { color: 'red' } },
+            vAxis: { title: 'vnd', titleTextStyle: { color: 'red' } },
+            animation: { duration: 2500, easing: 'out', startup: true }
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+    </script>
+</head>
+<body>
+    @RenderPage("/Views/Share/nav_quanly.cshtml")
+    <div class="container">
+        <div class="row">
+            <div id="chart_div" style="height:500px">
+
+            </div>
+        </div>
+       
+    </div>
+    @RenderPage("/Views/Share/footer.cshtml")
+</body>
+</html>

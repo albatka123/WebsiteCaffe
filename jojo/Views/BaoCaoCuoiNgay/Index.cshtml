@@ -1,0 +1,139 @@
+﻿@using Cafe.Models;@using Cafe.DTO;
+
+@{
+    Layout = null;
+    NhanVienDto nv = ViewBag.nhanvien as NhanVienDto;
+    List<hoadon> list = ViewBag.hoadon as List<hoadon>;
+    var doanhthu = 0;
+
+    var z = 0;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="~/image/caffe.ico">
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <title>BaoCaoCuoiNgay</title>
+    <script>
+
+    </script>
+    <style>
+        .minheight {
+            min-height: 370px;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="container minheight">
+        <div class="row">
+            <h2 class="text-center text-info" style="color:saddlebrown">Kết quả báo cáo cuối ngày</h2>
+            <h3 class="text-center text-info" style="color:saddlebrown">@ViewBag.ngay</h3>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="panel" >
+                <div class="panel-heading" style="background-color:sandybrown">
+                <h3 class="panel-title" style="color:white">Doanh thu</h3></div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Thời điểm</th>
+                                <th>Tên khách hàng</th>
+                                <th>Nhân viên bán</th>
+                                <th>Giảm giá</th>
+                                <th>Tổng tiền</th>
+                                <th>Khách phải trả</th>
+                                <td>Chi tiết</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (list != null)
+                            {
+                                foreach (var hoadon in list)
+                                {
+                                    doanhthu = doanhthu + hoadon.khachphaitra;
+                                    var h = "chitiet" + z;
+                                    var h2 = '#' + h;
+                                    z++;
+                                    <tr>
+                                        <td>@z</td>
+                                        <td>@hoadon.ngayhoadon.ToShortDateString() @hoadon.ngayhoadon.ToShortTimeString()</td>
+                                        <td>@hoadon.khachhang.tenkhachhang</td>
+                                        <td>@hoadon.nhanvien.hovaten</td>
+                                        <td>@hoadon.giamgia</td>
+                                        <td>@hoadon.tongtien</td>
+                                        <td>@hoadon.khachphaitra</td>
+                                        <td><button data-toggle="collapse" class="btn btn-info" data-target="@h2"><span class="glyphicon glyphicon-plus"></span></button></td>
+                                    </tr>
+                                    <tr id="@h" class="collapse">
+                                        <td colspan="6">
+                                            <div class="panel panel-info mypanel">
+                                                <table class="table borderless">
+                                                    <tr>
+                                                        <th>Tên sản phẩm</th>
+                                                        <th>Số lượng</th>
+                                                        <th>Đơn giá</th>
+                                                        <th>Thành tiền</th>
+                                                        <th>Tổng tiền</th>
+                                                    </tr>
+                                                    @if (hoadon.chitiethoadons != null)
+                                                    {
+                                                        foreach (chitiethoadon chitiet in hoadon.chitiethoadons)
+                                                        {
+                                                            <tr>
+                                                                <td>@chitiet.sanpham.ten</td>
+                                                                <td>@chitiet.soluong</td>
+                                                                <td>@chitiet.sanpham.gia</td>
+                                                                <td>@(chitiet.soluong * chitiet.sanpham.gia)</td>
+                                                                <td>@chitiet.thanhtien</td>
+                                                            </tr>
+                                                            if (chitiet.bangphus != null)
+                                                            {
+                                                                foreach (bangphu phu in chitiet.bangphus)
+                                                                {
+                                                                    <tr>
+                                                                        <td style="text-indent:10px;">+ @phu.sanphamphu.ten</td>
+                                                                        <td>@phu.soluong</td>
+                                                                        <td>@phu.sanphamphu.gia</td>
+                                                                        <td>@(phu.soluong * phu.sanphamphu.gia)</td>
+                                                                    </tr>
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+
+                    <h3>Tổng doanh thu: @doanhthu</h3>
+
+
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+
+    </div>
+
+    @RenderPage("/Views/Share/footer.cshtml")
+</body>
+</html>

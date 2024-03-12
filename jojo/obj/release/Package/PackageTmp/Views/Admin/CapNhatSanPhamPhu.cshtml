@@ -1,0 +1,74 @@
+﻿@using jojo.Models
+@{
+    sanphamphu sp = ViewBag.sanphamphu as sanphamphu;
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <title>CapNhatSanPhamPhu</title>
+    <script>
+        function Xoa(id) {
+            var r = confirm("Bạn có chắc muốn xóa");
+            if (r == true) {
+                window.location = "/Admin/XoaSanPham3?id=" + id;
+            }
+        }
+        $(document).ready(function () {
+            $('form').submit(function () {
+
+                var ten = $('#ten').val();
+                var gia = $('#gia').val();
+
+                if (ten == "") {
+                    alert("Tên sản phẩm không được để trống");
+                    return false;
+                }
+
+                if (gia == "") {
+                    alert("Giá sản phẩm không được để trống");
+                    return false;
+                }
+
+            });
+
+        });
+    </script>
+</head>
+<body>
+    @RenderPage("/Views/Share/nav_admin.cshtml")
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-offset-3 col-sm-6">
+                <form class="form-horizontal" action="/Admin/CapNhatSanPham3" method="post">
+                    <input type="hidden" class="form-control" name="id" value="@sp.id">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">*Tên</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="ten" name="ten" value="@sp.ten">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">*Giá</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" id="gia" name="gia" min="1000" max="1000000" value="@sp.gia">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="submit" class="btn btn-default">Cập Nhật</button>
+                            <input type="button" class="btn btn-default" value="Xóa" onclick="Xoa('@sp.id')">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

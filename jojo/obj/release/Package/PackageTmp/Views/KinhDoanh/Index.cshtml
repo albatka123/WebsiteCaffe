@@ -1,0 +1,1147 @@
+﻿@using jojo.Models
+@using jojo.DTO
+@{
+    var jss = new System.Web.Script.Serialization.JavaScriptSerializer();
+    Layout = null;
+    nhanvien nv = ViewBag.nhanvien as nhanvien;
+    List<sanpham> sanphams = ViewBag.sanphams as List<sanpham>;
+    List<sanphamphu> sanphamphus = ViewBag.sanphamphus as List<sanphamphu>;
+    List<khachhang0> khachhang3 = ViewBag.khachhang as List<khachhang0>;
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <link rel="shortcut icon" href="/image/jojo.ico">
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/moment.min.js"></script>
+    <script src="/Scripts/shortcut.js"></script>
+    <title>Sale</title>
+    <style>
+        .modal2 {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content/Box */
+        .modal-content2 {
+            background-color: #fefefe;
+            margin: 5% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .inputsoluong {
+            width: 40px;
+            text-align: center;
+        }
+
+        .panelfixed {
+            min-height: 600px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .panelfixed2 {
+            min-height: 500px;
+        }
+
+        .pointer {
+            cursor: pointer;
+        }
+
+        span.glyphicon-remove:hover {
+            font-size: 1.1em;
+            color: red;
+        }
+
+        .mintable {
+            min-height: 240px;
+        }
+
+        .lasttable tr td {
+            padding: 6px;
+        }
+
+        .table-hover tr:hover {
+            cursor: pointer;
+        }
+
+        input[type=checkbox] {
+            /* Double-sized Checkboxes */
+            -ms-transform: scale(2); /* IE */
+            -moz-transform: scale(2); /* FF */
+            -webkit-transform: scale(2); /* Safari and Chrome */
+            -o-transform: scale(2); /* Opera */
+            padding: 10px;
+        }
+
+        .glyphicon-remove {
+            cursor: pointer;
+        }
+
+        .table_chon_giamgia tr td {
+            padding: 10px;
+        }
+
+        .styletable td {
+            font-size: 0.9em;
+        }
+
+        .alert-fixed {
+            position: fixed;
+            top: 0px;
+            height: 100px;
+            width: 100%;
+            border-radius: 0px;
+            text-align: center;
+        }
+
+        .sub2 {
+            margin-left: 10px;
+        }
+
+        .my-input-fix-width {
+            min-width: 120px;
+            text-align: left;
+        }
+    </style>
+    <script>
+
+        var chitiethoadon = [];
+        var khachhangs;
+        var hoadonmois = [];
+
+        $(document).ready(function () {
+
+
+
+            $("#fail-alert").hide();
+            $("#success-alert").hide();
+            khachhangs = @Html.Raw(Json.Encode(khachhang3))
+            startTime();
+            $('#tenkhachhang').val('Khách lẻ');
+            $('#tenkhachhang').prop('readonly', true);
+            $('#diachikhachhang').val('');
+            $('#diachikhachhang').prop('readonly', true);
+
+            $('#close1').click(function () {
+                $('#myModal').css('display', 'none');
+            });
+
+            $('#close2').click(function () {
+                $('#myModal4').css('display', 'none');
+            });
+
+            $('#sdtkhachhang').keyup(function () {
+
+
+                var sdtkhachhang = $('#sdtkhachhang').val();
+                //var sdtkhachhang2 = sdtkhachhang.replace(/ /g, '');
+
+                if (sdtkhachhang == "") {
+                    $('#tenkhachhang').val('Khách lẻ');
+                    $('#tenkhachhang').prop('readonly', true);
+                    $('#diachikhachhang').val('');
+                    $('#diachikhachhang').prop('readonly', true);
+                } else {
+                    var k = -1;
+
+                    for (var i = 0; i < khachhangs.length; i++) {
+
+                        if (khachhangs[i].sodienthoai == sdtkhachhang) {
+                            k = i;
+                            break;
+                        }
+                    }
+                    if (k == -1) {
+                        $('#tenkhachhang').val('');
+                        $('#diachikhachhang').val('');
+                        $('#tenkhachhang').prop('readonly', false);
+                        $('#diachikhachhang').prop('readonly', false);
+                    } else {
+                        $('#tenkhachhang').val(khachhangs[k].tenkhachhang);
+                        $('#tenkhachhang').prop('readonly', true);
+                        $('#diachikhachhang').val(khachhangs[k].diachi);
+                        $('#diachikhachhang').prop('readonly', true);
+                    }
+                }
+
+
+
+
+            });
+
+            $("#myModal").hover(function () {
+                this.focus();
+            }, function () {
+                this.blur();
+            }).keydown(function (e) {
+                if (e.keyCode == 13) {
+                    var id = $('#id').text();
+                    var ten = $('#ten').text();
+                    var gia = Number($('#gia').text());
+                    var soluong = 1;
+                    var phus = [];
+                    var table = document.getElementById("table_phu");
+                    var table2 = document.getElementById("table_hoadon");
+
+                    var thanhtien = 0 + gia;
+                    for (var j = 1; j < table.rows.length; j++) {
+                        if (table.rows[j].cells[0].firstChild.checked == true) {
+                            var id2 = table.rows[j].cells[1].innerHTML;
+                            var ten2 = table.rows[j].cells[2].innerHTML;
+                            var gia2 = Number(table.rows[j].cells[3].innerHTML);
+                            var soluong2 = Number(table.rows[j].cells[4].innerHTML);
+                            thanhtien = thanhtien + (gia2 * soluong2);
+                            phus.push({
+                                id2: id2,
+                                ten2: ten2,
+                                gia2: gia2,
+                                soluong2: soluong2,
+                            });
+                        }
+                    }
+                    var k = -1;
+                    for (var i = 0; i < chitiethoadon.length; i++) {
+                        if (chitiethoadon[i].id == id && check(chitiethoadon[i].phus, phus)) {
+                            k = i;
+                            break;
+                        }
+                    }
+                    if (k == -1) {
+                        chitiethoadon.push({
+                            id: id,
+                            ten: ten,
+                            gia: gia,
+                            soluong: soluong,
+                            phus: phus,
+                            thanhtien: thanhtien
+                        });
+                        var row = "<tr>";
+                        row = row + "<td>" + table2.rows.length + "</td>";
+                        if (phus.length == 0) {
+                            row = row + "<td>" + ten + "</td>";
+                        } else {
+                            row = row + "<td>" + ten + "</br>";
+                            for (var j = 0; j < phus.length; j++) {
+                                for (var z = 0; z < phus[j].soluong2 ; z++) {
+                                    row = row + "<span class='sub2'>" + phus[j].ten2 + "</span></br >";
+                                }
+                            }
+                            row = row + "</td>"
+                        }
+                        row = row + "<td>" + soluong + "</td>";
+                        row = row + "<td>" + thanhtien + "</td>";
+                        row = row + "<td>" + '<span class="glyphicon glyphicon-remove text-danger" aria-hidden="true" onclick="del(this)"></span>' + "</td>";
+                        row = row + "</tr>";
+                        $('#table_hoadon > tbody').append(row);
+
+                    } else {
+                        chitiethoadon[k].soluong = chitiethoadon[k].soluong + 1;
+                        chitiethoadon[k].thanhtien = chitiethoadon[k].thanhtien + thanhtien;
+                        table2.rows[k + 1].cells[2].innerHTML = chitiethoadon[k].soluong;
+                        table2.rows[k + 1].cells[3].innerHTML = chitiethoadon[k].thanhtien;
+                    }
+
+                    var tongtien = Number($('#tongtien').text()) + thanhtien;
+                    var giamgia = Number($('#giamgia').val());
+                    var khachphaitra = tongtien - giamgia;
+
+
+                    $('#tongtien').text(tongtien);
+                    $('#khachphaitra').text(khachphaitra);
+
+                    $('#myModal').css('display', 'none');
+
+                } else {
+                    if (e.keyCode == 27) {
+                        $('#myModal').css('display', 'none');
+                    }
+                }
+            });
+
+            fill_khachhang();
+
+            $('.search_khachhang').keyup(function () {
+                var sdt = $('#timkiem_sdtkhachhang').val();
+                var ten = $('#timkiem_tenkhachhang').val();
+                var diachi = $('#timkiem_diachikhachhang').val();
+                $('#tablekhachhang').html('');
+                for (var i = 0; i < khachhangs.length; i++) {
+                    if (khachhangs[i].sodienthoai.includes(sdt) && khachhangs[i].tenkhachhang.toUpperCase().includes(ten.toUpperCase()) && khachhangs[i].diachi.toUpperCase().includes(diachi.toUpperCase())) {
+                        var row = "<tr onclick=timkhachhang('" + i + "')>";
+                        row = row + "<td>" + khachhangs[i].tenkhachhang + "</td>";
+                        row = row + "<td>" + khachhangs[i].sodienthoai + "</td>";
+                        row = row + "<td>" + khachhangs[i].diachi + "</td>";
+                        row = row + "</tr>";
+
+                        $('#tablekhachhang').append(row);
+                    }
+                }
+            });
+
+            shortcut.add("F12", function () {
+                ThanhToan();
+            });
+
+
+            window.onbeforeunload = null;
+        });
+
+
+        function timkhachhang(i) {
+            $('#sdtkhachhang').val(khachhangs[i].sodienthoai);
+            $('#tenkhachhang').val(khachhangs[i].tenkhachhang);
+            $('#tenkhachhang').prop('readonly', true);
+            $('#diachikhachhang').val(khachhangs[i].diachi);
+            $('#diachikhachhang').prop('readonly', true);
+            $('#myModal4').css("display", "none");
+
+
+        }
+
+
+
+        function fill_khachhang() {
+            var table = document.getElementById("tablekhachhang");
+            for (var i = 0; i < khachhangs.length; i++) {
+                var row = "<tr onclick=timkhachhang('" + i + "')>";
+                row = row + "<td>" + khachhangs[i].tenkhachhang + "</td>";
+                row = row + "<td>" + khachhangs[i].sodienthoai + "</td>";
+                row = row + "<td>" + khachhangs[i].diachi + "</td>";
+                row = row + "</tr>";
+
+                $('#tablekhachhang').append(row);
+            }
+        }
+
+
+        function check(phu1, phu2) {
+            if (phu1.length != phu2.length) {
+                return false;
+            }
+            for (var i = 0; i < phu1.length; i++) {
+                if (phu1[i].id2 != phu2[i].id2 || phu1[i].soluong2 != phu2[i].soluong2) {
+                    return false
+                }
+            }
+            return true;
+        }
+
+        function del(r) {
+            var i = r.parentNode.parentNode.rowIndex;
+            var thanhtien = chitiethoadon[i - 1].thanhtien;
+            chitiethoadon.splice(i - 1, 1);
+            var table = document.getElementById("table_hoadon");
+            table.deleteRow(i);
+            for (var j = i; j < table.rows.length; j++) {
+                table.rows[j].cells[0].innerHTML = j;
+            }
+
+            var tongtien = Number($('#tongtien').text()) - thanhtien;
+            var giamgia = Number($('#giamgia').val());
+            var khachphaitra = tongtien - giamgia;
+
+
+            $('#tongtien').text(tongtien);
+            $('#khachphaitra').text(khachphaitra);
+
+        }
+
+        function chon(id, ten, gia) {
+            $('#id').text(id);
+            $('#ten').text(ten);
+            $('#gia').text(gia);
+
+            var table = document.getElementById("table_phu");
+            for (var j = 1; j < table.rows.length; j++) {
+                table.rows[j].cells[4].innerHTML = 0;
+                table.rows[j].cells[0].firstChild.checked = false;
+            }
+            $('#myModal').css('display', 'block');
+        }
+
+        function chonphu(r) {
+            var table = document.getElementById("table_phu");
+            var i = Number(r) + 1;
+            var soluong = Number(table.rows[i].cells[4].innerHTML) + 1;
+            table.rows[i].cells[4].innerHTML = soluong;
+            var checkbox = table.rows[i].cells[0].firstChild;
+            checkbox.checked = true;
+        }
+
+        function giamgia1() {
+            var vnd = Number($('#theovnd').val());
+            $('#giamgia').val(vnd);
+            var tongtien = Number($('#tongtien').text());
+
+            var khachphaitra = tongtien - vnd;
+
+            $('#khachphaitra').text(khachphaitra);
+        }
+
+        function giamgia2() {
+            var phantram = Number($('#theophantram').val());
+            var vnd = 0;
+            if (phantram >= 0) {
+                var tongtien = Number($('#tongtien').text());
+                vnd = Math.ceil(tongtien * phantram / 100);
+            }
+
+            $('#giamgia').val(vnd);
+
+
+            var khachphaitra = tongtien - vnd;
+
+            $('#khachphaitra').text(khachphaitra);
+        }
+
+        function startTime() {
+
+            var today = new Date();
+            var date = today.getDate();
+            var month = today.getMonth() + 1;
+            var year = today.getFullYear();
+
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            date = checkTime(date);
+            month = checkTime(month);
+            $('#showdate').text("" + date + "/" + month + "/" + year + " " + h + ":" + m + ":" + s);
+
+            var t = setTimeout(startTime, 500);
+        }
+        function checkTime(i) {
+            if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+            return i;
+        }
+
+
+
+        function myhoadon() {
+
+            var idnhavien = $('#idnhanvien').text();
+            var tenkhachhang = $('#tenkhachhang').val() + "";
+            var sdtkhachhang = $('#sdtkhachhang').val() + "";
+            var diachikhachhang = $('#diachikhachhang').val() + "";
+            var ngay = moment().format("DD/MM/YYYY HH:mm:ss");
+            var giamgia = $('#giamgia').val();
+            var tongtien = $('#tongtien').text();
+            var khachphaitra = $('#khachphaitra').text();
+
+            // var flag = $('#tenkhachhang').prop('readonly');
+
+
+
+            // can check khach phai tra
+            //
+            var chitiets = [];
+            for (var i = 0; i < chitiethoadon.length; i++) {
+                var phus = [];
+                if (chitiethoadon[i].phus.length == 0) {
+                    chitiets.push({
+                        id: chitiethoadon[i].id,
+                        soluong: chitiethoadon[i].soluong,
+                        thanhtien: chitiethoadon[i].thanhtien,
+                        phus: null
+                    });
+                } else {
+                    for (var j = 0; j < chitiethoadon[i].phus.length; j++) {
+                        phus.push({
+                            id: chitiethoadon[i].phus[j].id2,
+                            soluong: chitiethoadon[i].phus[j].soluong2,
+                        });
+                    }
+                    chitiets.push({
+                        id: chitiethoadon[i].id,
+                        soluong: chitiethoadon[i].soluong,
+                        thanhtien: chitiethoadon[i].thanhtien,
+                        phus: phus
+                    });
+                }
+            }
+
+            var h = {
+                idnhanvien: idnhavien,
+                tenkhachhang: tenkhachhang,
+                sdtkhachhang: sdtkhachhang,
+                diachikhachhang: diachikhachhang,
+                ngay: ngay,
+                giamgia: giamgia,
+                tongtien: tongtien,
+                khachphaitra: khachphaitra,
+                chitiets: chitiets
+            };
+
+            h = JSON.stringify({ 'h': h });
+
+
+            var flag = $('#tenkhachhang').prop('readonly');
+
+
+            if (flag == false) {
+
+                khachhangs.push({
+                    id: 0,
+                    tenkhachhang: tenkhachhang,
+                    sodienthoai: sdtkhachhang,
+                    diachi: diachikhachhang,
+                    email: "",
+                    ghichu: "",
+                    trangthai: "",
+                    active: ""
+                });
+            }
+
+            return h;
+        }
+
+
+        function Send(h) {
+
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                async: false,
+                url: '/KinhDoanh/ThanhToan',
+                data: h,
+                success: function (result) {
+                    $("#success-alert").slideDown("slow");
+
+                    $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
+                        $("#success-alert").slideUp(500);
+                    });
+
+                },
+                error: function (response) {
+                    $("#fail-alert").slideDown("slow");
+
+                    $("#fail-alert").fadeTo(2000, 500).slideUp(500, function () {
+                        $("#fail-alert").slideUp(500);
+                    });
+
+                    var error = Number($('#error').text());
+                    error = error + 1;
+                    hoadonmois.push(h);
+                    $('#error').text(error);
+                    window.onbeforeunload = function () {
+                        return 'You have unsaved changes on this page!';
+                    }
+                }
+            });
+
+
+        }
+
+
+        function ThanhToan() {
+
+            PopupCenter('', 'PRINT', '600', '400');
+
+        }
+
+        function ViewTotalSoLuong() {
+            var soluong = 0;
+            var table = document.getElementById("table_hoadon");
+            for (var i = 1; i < table.rows.length; i++) {
+                soluong = soluong + Number(table.rows[i].cells[2].innerHTML);
+            }
+            alert(soluong);
+        }
+
+        function PopupCenter(url, title, w, h) {
+
+            var table = document.getElementById("table_hoadon");
+            var ngayhoadon = moment().format("DD/MM/YYYY HH:mm:ss");
+            var tennhanvien = $('#tennhanvien').text();
+            var tenkhachhang = $('#tenkhachhang').val();
+            var sdtkhachhang = $('#sdtkhachhang').val();
+            var diachikhachhang = $('#diachikhachhang').val();
+            var tongtien = $('#tongtien').text();
+            var giamgia = $('#giamgia').val();
+            var khachphaitra = $('#khachphaitra').text();
+            //
+
+            var patt = /^[0-9]{0,}$/;
+            var res = patt.test(sdtkhachhang);
+
+            if (res == false) {
+                alert("Số điện thoại không hợp lệ");
+                return;
+            }
+
+            if (patt.test(giamgia) == false || giamgia < 0) {
+                alert("Giá trị tiền giảm giá không hợp lệ");
+                return;
+            }
+
+            if (patt.test(khachphaitra) == false || khachphaitra <= 0) {
+                alert("Giá trị tiền khách trả không hợp lệ");
+                return;
+            }
+
+            // Fixes dual-screen position                         Most browsers      Firefox
+            var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+            var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+            width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+            height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+            var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+            var top = ((height / 2) - (h / 2)) + dualScreenTop;
+            var mywindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+
+            mywindow.document.write('<html><head><title>' + document.title + '</title>');
+            mywindow.document.write('<link rel="stylesheet" href="/Content/bill.css" media="print">');
+            mywindow.document.write('<link rel="stylesheet" href="/Content/bill2.css" media="print">');
+            mywindow.document.write('</head><body>');
+
+            mywindow.document.write('<div class="header1">');
+            mywindow.document.write('JOJO' + '<br />');
+            mywindow.document.write('Fresh & Healthy Fruit Drinks' + '<br />');
+            mywindow.document.write('225 Nguyễn Trọng Tuyển, P8, Q.PN ' + '<br />');
+            mywindow.document.write('Delivery: 01698.660.990');
+            mywindow.document.write('</div>');
+
+            // mywindow.document.write('<hr  style="border-top: 1px dashed #8c8b8b;"/>');
+            mywindow.document.write('<br /><br />');
+
+            //
+            mywindow.document.write('<div class="header2">');
+            mywindow.document.write('Ngày bán: ' + ngayhoadon + '<br />');
+            mywindow.document.write('<p class="center">' + 'HÓA ĐƠN BÁN HÀNG ' + '</p>' + '<br />');
+            mywindow.document.write('<strong>Người bán:</strong>' + tennhanvien + '<br />');
+            mywindow.document.write('<strong>Khách hàng:</strong>' + tenkhachhang + '<br />');
+            mywindow.document.write('<strong>Điện thoại:</strong>' + sdtkhachhang + '<br />');
+            mywindow.document.write('<strong>Địa chỉ:</strong> ' + diachikhachhang + '<br />');
+            mywindow.document.write('</div>');
+
+
+
+            mywindow.document.write('<table class="table1" width="100%" border="0">');
+            mywindow.document.write('<tr>');
+            mywindow.document.write('<th width="55%">' + 'Tên sản phẩm' + '</th>');
+            mywindow.document.write('<th width="15%">' + 'SL' + '</th>');
+            mywindow.document.write('<th width="30%">' + 'Thành tiền' + '</th>');
+            mywindow.document.write('</tr>');
+            for (var i = 1; i < table.rows.length; i++) {
+                mywindow.document.write('<tr>');
+                mywindow.document.write('<td width="55%" valign="top">' + table.rows[i].cells[1].innerHTML + '</td>');
+                mywindow.document.write('<td width="15%" valign="top">' + table.rows[i].cells[2].innerHTML + '</td>');
+                mywindow.document.write('<td width="30%" valign="top">' + table.rows[i].cells[3].innerHTML + '</td>');
+                mywindow.document.write('</tr>');
+            }
+            mywindow.document.write('</table>');
+
+            //mywindow.document.write('<hr  style="border-top: 1px dashed #8c8b8b;"/>');
+            mywindow.document.write('<br />');
+            //
+
+            mywindow.document.write('<div class="header3">');
+            mywindow.document.write('<strong>Tổng tiền:</strong> ' + tongtien + '<br />');
+            mywindow.document.write('<strong>Giảm giá:</strong> ' + giamgia + '<br />');
+            mywindow.document.write('<strong>Khách phải trả:</strong> ' + khachphaitra + '<br />');
+            mywindow.document.write('</div>');
+            //
+            mywindow.document.write('<br />');
+            //
+            mywindow.document.write('<div>');
+
+            mywindow.document.write('<h3 style="font-size: 0.5em;text-indent: 10px;"><strong>Đặc biệt:</strong></h3>');
+            mywindow.document.write('<h3 style="font-size: 0.5em;text-indent: 10px;"><strong>T5 tuần này với mỗi đơn trên 100k sẽ được FREE "Thạch Phô Mai" thêm vào trà sữa</strong></h3>');
+
+            mywindow.document.write('<h3 style="font-size: 0.5em;text-indent: 10px;"><strong>www.facebook.com/jojo.refreshyourday</strong></h3>');
+            //mywindow.document.write('<p style="font-size: 0.5em;text-indent: 4px;">Các bạn like fanpage, share bài viết, check in</p>');
+            //mywindow.document.write('<p style="font-size: 0.5em;text-indent: 6px;">để được tặng 1 phần topping 5k bất kì nhé</p>');
+
+            mywindow.document.write('</div>');
+
+            mywindow.document.write('<br /><br />');
+            mywindow.document.write('<p>.</p>');
+
+            //mywindow.document.write(document.getElementById("hoadon").innerHTML);
+            mywindow.document.write('</body></html>');
+
+            mywindow.document.close(); // necessary for IE >= 10
+
+
+
+            mywindow.onload = function () { // necessary if the div contain images
+                mywindow.focus(); // necessary for IE >= 10
+                mywindow.print();
+                mywindow.close();
+                var h = myhoadon();
+                LamMoi();
+                Send(h);
+            };
+
+            return true;
+            // Puts focus on the newWindow
+
+        }
+
+        function capnhathoadon() {
+
+            while (hoadonmois.length != 0) {
+                var stop = false;
+                var h = hoadonmois[0];
+                $.ajax({
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    async: false,
+                    type: 'POST',
+                    url: '/KinhDoanh/ThanhToan',
+                    data: h,
+                    success: function (result) {
+                        hoadonmois.splice(0, 1);
+                    },
+                    error: function (response) {
+                        alert("Cập nhật chưa hoàn thành, vui lòng cập nhật lại sau");
+                        stop = true;
+                    }
+                });
+
+                if (stop == true) {
+                    break;
+                }
+            };
+
+            $('#error').text(hoadonmois.length);
+            if (hoadonmois.length == 0) {
+                alert("Cập nhật thành công");
+                window.onbeforeunload = null;
+            }
+        }
+
+        function LamMoi() {
+            chitiethoadon = [];
+
+            var table = document.getElementById("table_hoadon");
+
+            var j = 1;
+            while (j < table.rows.length) {
+                table.deleteRow(j);
+            }
+            $('#sdtkhachhang').val('');
+            $('#tenkhachhang').val('Khách lẻ');
+            $('#tenkhachhang').prop('readonly', true);
+            $('#diachikhachhang').val('');
+            $('#diachikhachhang').prop('readonly', true);
+            $('#tongtien').text('0');
+            $('#giamgia').val('0');
+            $('#khachphaitra').text('0');
+        }
+
+        function showkhachhang() {
+            $('#myModal4').css("display", "block");
+
+        }
+
+
+    </script>
+
+</head>
+<body>
+    @if (nv.loai == 1)
+    {
+        @RenderPage("/Views/Share/nav_nhanvien.cshtml")
+    }
+    else
+    {
+        @RenderPage("/Views/Share/nav_quanly.cshtml")
+    }
+
+    <div class="container-fluid">
+        <div class="col-sm-8">
+            <div class="col-sm-4">
+                <div class="panel panel-success panelfixed">
+                    <div class="panel-heading"><h3 class="panel-title">Sinh Tố</h3></div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < sanphams.Count; i++)
+                                {
+                                    if (sanphams[i].loai == "1")
+                                    {
+                                        <tr onclick="chon('@sanphams[i].id','@sanphams[i].ten','@sanphams[i].gia')">
+                                            <td>@sanphams[i].ten</td>
+                                            <td>@sanphams[i].gia</td>
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="panel panel-success panelfixed">
+                    <div class="panel-heading"><h3 class="panel-title">Trà Sữa</h3></div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < sanphams.Count; i++)
+                                {
+                                    if (sanphams[i].loai == "2")
+                                    {
+                                        <tr onclick="chon('@sanphams[i].id','@sanphams[i].ten','@sanphams[i].gia')">
+                                            <td>@sanphams[i].ten</td>
+                                            <td>@sanphams[i].gia</td>
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="panel panel-success panelfixed">
+                    <div class="panel-heading"><h3 class="panel-title">Sản phẩm khác</h3></div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < sanphams.Count; i++)
+                                {
+                                    if (sanphams[i].loai == "3")
+                                    {
+                                        <tr onclick="chon('@sanphams[i].id','@sanphams[i].ten','@sanphams[i].gia')">
+                                            <td>@sanphams[i].ten</td>
+                                            <td>@sanphams[i].gia</td>
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-4" id="thanhcong">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Hóa đơn <span class="pull-right" id="showdate"></span></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="col-xs-6">
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-addon">SĐT</span>
+                                            <input type="text" class="form-control" id="sdtkhachhang">
+                                        </div>
+                                    </td>
+                                    <td class="col-xs-6">
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-addon">Tên</span>
+                                            <input type="text" class="form-control" id="tenkhachhang">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="col-xs-10">
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-addon">Địa chỉ</span>
+                                            <input type="text" class="form-control" id="diachikhachhang">
+                                        </div>
+                                    </td>
+                                    <td class="col-xs-2">
+                                        <button onclick="showkhachhang()" class="btn btn-primary pull-right">Search</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="mintable">
+                            <table class="table styletable" id="table_hoadon">
+                                <thead>
+                                    <tr>
+                                        <th class="col-sm-1">#</th>
+                                        <th class="col-sm-5">Tên sản phẩm</th>
+                                        <th class="col-sm-2"><button onclick="ViewTotalSoLuong()">SL</button></th>
+                                        <th class="col-sm-3">Thành tiền</th>
+                                        <th class="col-sm-1"></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <hr style="border-top: 1px dashed #8c8b8b;">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="lasttable">
+                                <tbody>
+                                    <tr>
+                                        <td class="col-sm-4">Tổng tiền</td>
+                                        <td class="col-sm-8">
+                                            <span id="tongtien">0</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-4">Giảm giá</td>
+                                        <td class="col-sm-8">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="giamgia" value="0" readonly>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="button" data-toggle="modal" data-target="#myModal2">VND</button>
+                                                    <button class="btn btn-default" type="button" data-toggle="modal" data-target="#myModal3">%</button>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-4">Khách phải trả</td>
+                                        <td class="col-sm-8"><span id="khachphaitra">0</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br />
+                            <table class="lasttable">
+                                <tbody>
+                                    <tr>
+                                        <td class="col-sm-4"><button onclick="ThanhToan()" type="button" class="btn btn-primary">Thanh Toán(F12)</button></td>
+                                        <td class="col-sm-4"><button onclick="LamMoi()" type="button" class="btn btn-primary">Làm Mới</button></td>
+                                        <td class="col-sm-4"><button onclick="capnhathoadon()" type="button" class="btn btn-danger pull-right">Cập nhật <span id="error">0</span></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <hr />
+        </div>
+    </div>
+    @RenderPage("/Views/Share/footer.cshtml")
+
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal2" tabindex="0">
+        <!-- Modal content -->
+        <div class="modal-content2">
+            <span id="close1" class="close">x</span>
+            <div id="luachonsub">
+                <span id="id" style="display:none"></span>
+                <span id="ten" style="display:none"></span>
+                <span id="gia" style="display:none"></span>
+                <table class="table table-hover" id="table_phu">
+                    <thead>
+                        <tr>
+                            <th>Chọn</th>
+                            <th style="display:none">ID</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Số lượng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < sanphamphus.Count; i++)
+                        {
+                            <tr>
+                                <td class="col-sm-1"><input type="checkbox" /></td>
+                                <td style="display:none">@sanphamphus[i].id</td>
+                                <td onclick="chonphu('@i')">@sanphamphus[i].ten</td>
+                                <td onclick="chonphu('@i')">@sanphamphus[i].gia</td>
+                                <td onclick="chonphu('@i')">0</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="myModal2" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Giảm giá theo VNĐ</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table_chon_giamgia">
+                        <tr>
+                            <td class="col-sm-5"><input type="number" min="1000" max="9000000" class="form-control" id="theovnd"></td>
+                            <td class="col-sm-2">VNĐ</td>
+                        </tr>
+                        <tr>
+                            <td class="col-sm-5"><button class="btn btn-default" onclick="giamgia1()">Xác Nhận</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal3" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Giảm giá theo %</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table_chon_giamgia">
+                        <tr>
+                            <td class="col-sm-5"><input type="number" min="1" max="100" class="form-control" id="theophantram"></td>
+                            <td class="col-sm-2">%</td>
+                        </tr>
+                        <tr>
+                            <td class="col-sm-5"><button class="btn btn-default" onclick="giamgia2()">Xác Nhận</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="myModal4" class="modal2" tabindex="0">
+        <!-- Modal content -->
+        <div class="modal-content2">
+            <span id="close2" class="close">x</span>
+            <h3 class="text-center text-primary">Khách hàng</h3>
+            <div class="khungsearchkhachhang">
+
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon my-input-fix-width">Số điện thoại</span>
+                    <input type="text" class="form-control input-sm search_khachhang" id="timkiem_sdtkhachhang">
+                </div>
+                <br />
+
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon my-input-fix-width">Tên khách hàng</span>
+                    <input type="text" class="form-control input-sm search_khachhang" id="timkiem_tenkhachhang">
+                </div>
+                <br />
+
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon my-input-fix-width">Địa chỉ</span>
+                    <input type="text" class="form-control input-sm search_khachhang" id="timkiem_diachikhachhang">
+                </div>
+            </div>
+            <hr />
+
+            <div style="min-height:250px; max-height:250px; overflow-y:auto">
+                <table class="table table-hover styletable">
+                    <thead>
+                        <tr>
+                            <th>Tên khách hàng</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablekhachhang"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-info alert-fixed" id="success-alert">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <strong>Success! </strong><br />
+        Thêm hóa đơn thành công
+    </div>
+
+    <div class="alert alert-danger alert-fixed" id="fail-alert">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <strong>Fail! </strong><br />
+        Không thành công.<br />
+        Hãy cập nhật lại sau...!
+    </div>
+
+
+</body>
+
+</html>

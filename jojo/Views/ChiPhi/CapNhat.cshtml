@@ -1,0 +1,113 @@
+﻿@using Cafe.Models
+@using Cafe.DTO
+
+
+@{
+    Layout = null;
+    NhanVienDto nv = ViewBag.nhanvien as NhanVienDto;
+    List<loaichiphi> loaichiphis = ViewBag.loaichiphis as List<loaichiphi>;
+    chiphi chiphi = ViewBag.chiphi as chiphi; 
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="~/image/caffe.ico">
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <title>CapNhat</title>
+    <script>
+        $(document).ready(function () {
+
+            $('form').submit(function () {
+                var ngay = $('#ngay').val();
+                var chiphi = $('#chiphi').val();
+
+                if (ngay == "") {
+                    alert("Bạn chưa nhập ngày");
+                    return false;
+                }
+
+                if (chiphi == "") {
+                    alert("Bạn chưa nhập chi phí");
+                    return false;
+                }
+
+            });
+        });
+    </script>
+
+    <style>
+        .minheight {
+            min-height: 370px;
+        }
+    </style>
+</head>
+<body>
+    @RenderPage("/Views/Share/nav_quanly.cshtml")
+    <div class="container minheight">
+        <div class="row">
+            <h3 class="text-center text-primary">Cập Nhật Chi Phí</h3>
+            <br />
+            <div class="col-sm-offset-3 col-sm-6">
+                <form class="form-horizontal" method="post" action="/ChiPhi/CapNhat2">
+                    <div class="form-group">
+                        <input name="id" value="@chiphi.id" class="hidden"/>
+                        <label class="control-label col-sm-3">Ngày</label>
+                        <div class="col-sm-7">
+                            <input type="date" name="ngay" id="ngay" class="form-control" value="@chiphi.ngay.ToString("yyyy-MM-dd")">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Loại Chi phí</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" name="loaichiphi">
+                                @for (int i = 0; i < loaichiphis.Count; i++)
+                                {
+                                    if (chiphi.idloaichiphi == loaichiphis[i].id)
+                                    {
+                                        <option selected value="@loaichiphis[i].id">@loaichiphis[i].tenchiphi</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@loaichiphis[i].id">@loaichiphis[i].tenchiphi</option>
+                                    }
+                                    
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Chi phí</label>
+                        <div class="col-sm-7">
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="chiphi" name="chiphi" min="1" max="99000000" value="@chiphi.chiphi1">
+                                <span class="input-group-addon">VNĐ</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3"></label>
+                        <div class="col-sm-3">
+                            <input type="submit" class="form-control" value="Xác Nhận">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+    @RenderPage("/Views/Share/footer.cshtml")
+</body>
+</html>

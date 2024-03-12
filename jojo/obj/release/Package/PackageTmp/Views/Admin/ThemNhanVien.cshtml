@@ -1,0 +1,139 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <title>ThemNhanVien</title>
+
+    <script>
+        $(document).ready(function () {
+
+            $('form').submit(function () {
+
+                var ten = $('#hovaten').val();
+                var congviec = $('#congviec').val();
+                var taikhoan = $('#taikhoan').val();
+                var matkhau = $('#matkhau').val();
+                
+
+                if (ten == "") {
+                    alert("Họ và tên không được để trống");
+                    return false;
+                }
+
+                if (congviec == "") {
+                    alert("Công việc không được để trống");
+                    return false;
+                }
+
+                if (taikhoan == "") {
+                    alert("Tài khoản không được để trống");
+                    return false;
+                }
+
+                if (matkhau == "") {
+                    alert("Mật khẩu không được để trống");
+                    return false;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    @RenderPage("/Views/Share/nav_admin.cshtml")
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-offset-3 col-sm-6">
+                <form class="form-horizontal" action="/Admin/ThemNhanVien2" method="post">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">* Họ và tên</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="hovaten" name="hovaten">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Giới tính</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" id="gioitinh" name="gioitinh">
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Ngày sinh</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="ngaysinh" name="ngaysinh">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Số điện thoại</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="sodienthoai" name="sdt">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Địa chỉ</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="diachi" name="diachi">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Chứng minh thư</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="chungminhthu" name="cmnd">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Ngày vào làm</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="ngayvaolam" name="ngayvaolam">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">* Công việc</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="congviec" name="congviec">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Loại tài khoản</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" id="loai" name="loai">
+                                <option value="1">Nhân viên</option>
+                                <option value="2">Quản lý</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">* Tài khoản</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="taikhoan" name="taikhoan">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">* Mật khẩu</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="matkhau" name="matkhau">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="submit" class="btn btn-default">Xác Nhận</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

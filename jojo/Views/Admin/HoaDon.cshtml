@@ -1,0 +1,147 @@
+﻿@using Cafe.Models;
+
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Cafe.Models.bangxoahoadon>
+
+
+@{
+    Layout = null;
+   
+    var doanhthu = 0;
+
+    var z = 0;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="~/image/caffe.ico">
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <title>BaoCao</title>
+    <script>
+
+    </script>
+    <style>
+        .minheight {
+            min-height: 370px;
+        }
+    </style>
+</head>
+<body>
+    @RenderPage("/Views/Share/nav_admin.cshtml")
+    <div class="container minheight">
+        <div class="row">
+            <h2 class="text-center text-info">Hóa đơn đã bi xóa</h2>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Thời điểm xóa</th>
+                        <th>Nhân viên xóa</th>
+                        <th>Ngày hóa đơn</th>
+                        <th>Nhân viên bán</th>
+                        <th>Khách hàng</th>
+                        <th>Tổng tiền</th>
+                        <th>Giảm giá</th>
+                        <th>Khách phải trả</th>
+                        <th>Chi tiết</th>
+                        <th>Xóa</th>
+                        <th>Phục hồi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        var i = 0;
+                        foreach (var item in Model)
+                        {
+                        var h = "chitiet" + i;
+                        var h2 = '#' + h;
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>@item.ngay.ToShortDateString() @item.ngay.ToShortTimeString()</td>
+                            <td>@item.nhanvien.hovaten</td>
+                            <td>@item.hoadon.ngayhoadon.ToShortDateString() @item.hoadon.ngayhoadon.ToShortTimeString() </td>
+                            <td>@item.hoadon.nhanvien.hovaten</td>
+                            <td>@item.hoadon.khachhang.tenkhachhang</td>
+                            <td>@item.hoadon.tongtien</td>
+                            <td>@item.hoadon.giamgia</td>
+                            <td>@item.hoadon.khachphaitra</td>
+                            <td><button data-toggle="collapse" class="btn btn-info" data-target="@h2"><span class="glyphicon glyphicon-plus"></span></button></td>
+                            <td><a class="btn btn-danger" href="/Admin/Xoahoadon?id=@item.id"><span class="glyphicon glyphicon-trash"></span></a></td>
+                            <td><a class="btn btn-success" href="/Admin/Phuchoihoadon?id=@item.id"><span class="glyphicon glyphicon-retweet"></span></a></td>
+                        </tr>
+                        <tr id="@h" class="collapse">
+                            <td colspan="7">
+                                <div class="panel panel-info mypanel">
+                                    <table class="table borderless">
+                                        <tr>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Số lượng</th>
+                                            <th>Đơn giá</th>
+                                            <th>Thành tiền</th>
+                                            <th>Tổng tiền</th>
+                                        </tr>
+                                        @if (item.hoadon.chitiethoadons != null)
+                                        {
+                                            foreach (chitiethoadon chitiet in item.hoadon.chitiethoadons)
+                                            {
+                                                <tr>
+                                                    <td>@chitiet.sanpham.ten</td>
+                                                    <td>@chitiet.soluong</td>
+                                                    <td>@chitiet.sanpham.gia</td>
+                                                    <td>@(chitiet.soluong * chitiet.sanpham.gia)</td>
+                                                    <td>@chitiet.thanhtien</td>
+                                                </tr>
+                                                if (chitiet.bangphus != null)
+                                                {
+                                                    foreach (bangphu phu in chitiet.bangphus)
+                                                    {
+                                                        <tr>
+                                                            <td style="text-indent:10px;">+ @phu.sanphamphu.ten</td>
+                                                            <td>@phu.soluong</td>
+                                                            <td>@phu.sanphamphu.gia</td>
+                                                            <td>@(phu.soluong * phu.sanphamphu.gia)</td>
+                                                        </tr>
+                                                    }
+
+                                                }
+                                            }
+                                        }
+
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        i = i + 1;
+                        }
+                    }
+                 
+                </tbody>
+            </table>
+
+        
+        </div>
+
+        <br />
+
+        <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("HoaDon", new { page }))
+
+    </div>
+
+</body>
+</html>

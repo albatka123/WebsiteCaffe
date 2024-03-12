@@ -1,0 +1,64 @@
+﻿@using jojo.Models;
+@using jojo.DTO;
+@{
+    Layout = null;
+    nhanvien nv = ViewBag.nhanvien as nhanvien;
+    List<TKDoanhThu> list = ViewBag.doanhthu as List<TKDoanhThu>;
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="/image/jojo.ico">
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <title>DoanhThu</title>
+    <script>
+        
+    </script>
+    <style>
+        .minheight{
+            min-height:370px;
+        }
+    </style>
+</head>
+<body>
+    @RenderPage("/Views/Share/nav_quanly.cshtml")
+    <div class="container minheight">
+        <div class="row">
+            <h2 class="text-center text-info">Kết quả thống kê doanh thu</h2>
+            <h3>Từ ngày: @ViewBag.tungay</h3>
+            <h3>Tới ngày: @ViewBag.toingay</h3>
+            <h3>Tổng tiền: @ViewBag.tongtien</h3>
+        </div>
+        <br />
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Ngày hóa đơn</th>
+                        <th>Giảm giá</th>
+                        <th>Tổng tiền</th>
+                        <th>Khách phải trả</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < list.Count; i++)
+                    {
+                        <tr>
+                            <td>@list[i].ngay.ToString("dd/MM/yyyy")</td>
+                            <td>@list[i].giamgia</td>
+                            <td>@list[i].tongtien</td>
+                            <td>@list[i].khachphaitra</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @RenderPage("/Views/Share/footer.cshtml")
+</body>
+</html>

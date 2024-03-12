@@ -1,0 +1,72 @@
+﻿@using jojo.Models;
+@{
+    Layout = null;
+    nhanvien nv = ViewBag.nhanvien as nhanvien;
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="/image/jojo.ico">
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <title>ChiPhi</title>
+    <script>
+        $(document).ready(function () {
+            $('form').submit(function () {
+                var tungay = $('#tungay').val();
+                var toingay = $('#toingay').val();
+
+                if (tungay == "") {
+                    alert("Bạn chưa nhập 'từ ngày'");
+                    return false;
+                }
+
+                if (toingay == "") {
+                    alert("Bạn chưa nhập 'tới ngày'");
+                    return false;
+                }
+
+            });
+        });
+    </script>
+    <style>
+        .minheight{
+            min-height:370px;
+        }
+    </style>
+</head>
+<body>
+    @RenderPage("/Views/Share/nav_quanly.cshtml")
+    <div class="container minheight">
+        <div class="row">
+            <div class="col-sm-offset-3 col-sm-6">
+                <form class="form-horizontal" method="post" action="/ThongKe/ChiPhi2">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Từ Ngày</label>
+                        <div class="col-sm-7">
+                            <input type="date" name="tungay" id="tungay" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Tới Ngày</label>
+                        <div class="col-sm-7">
+                            <input type="date" name="toingay" id="toingay" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3"></label>
+                        <div class="col-sm-3">
+                            <input type="submit" class="form-control" value="Xem">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @RenderPage("/Views/Share/footer.cshtml")
+</body>
+</html>

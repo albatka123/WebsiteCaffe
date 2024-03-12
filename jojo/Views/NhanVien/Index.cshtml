@@ -1,0 +1,71 @@
+﻿@using Cafe.Models;
+@using Cafe.DTO;
+@{
+    Layout = null;
+    NhanVienDto nv = ViewBag.nhanvien as NhanVienDto;
+    List<nhanvien> nhanvien = ViewBag.nhanviens as List<nhanvien>;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="~/image/caffe.ico">
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <title>NhanVien</title>
+    <script>
+        function Xoa(id) {
+            var r = confirm("Bạn có chắc muốn xóa");
+            if (r == true) {
+                window.location = "/Admin/XoaNhanVien?id=" + id;
+            }
+        }
+    </script>
+    <style>
+        .minheight {
+            min-height: 370px;
+        }
+    </style>
+</head>
+<body>
+    @RenderPage("/Views/Share/nav_quanly.cshtml")
+    <div class="container minheight">
+
+        <br /><br /><br />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col-sm-1">STT</th>
+                    <th class="col-sm-3">Họ và tên</th>
+                    <th class="col-sm-2">Chức vụ</th>
+                    <th class="col-sm-2">Tên tài Khoản</th>
+                    <th>Chọn</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < nhanvien.Count; i++)
+                {
+                    <tr>
+                        <td class="col-sm-1">@(i + 1)</td>
+                        <td class="col-sm-3">@nhanvien[i].hovaten</td>
+                        <td class="col-sm-2">@nhanvien[i].congviec</td>
+                        <td class="col-sm-2">@nhanvien[i].taikhoan</td>
+                        <td>
+                            <div class="btn-group">
+
+                                <a href="/Admin/NhanVien" class="btn btn-success">Chỉnh sửa</a>
+
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</body>
+@RenderPage("/Views/Share/footer.cshtml")
+</html>

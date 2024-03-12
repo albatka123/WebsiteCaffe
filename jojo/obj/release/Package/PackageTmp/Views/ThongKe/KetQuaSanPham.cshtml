@@ -1,0 +1,182 @@
+﻿@using jojo.Models;
+@using jojo.DTO;
+@{
+    Layout = null;
+    nhanvien nv = ViewBag.nhanvien as nhanvien;
+    List<TKSanPham> list = ViewBag.sanpham as List<TKSanPham>;
+    var sinhto = 0;
+    var trasua = 0;
+    var sanphamkhac = 0;
+    var sanphamphu = 0;
+
+    list = list.OrderByDescending(x => x.soluong).ToList();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="/image/jojo.ico">
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <title>SanPham</title>
+    <script>
+
+    </script>
+    <style>
+        .minheight{
+            min-height:370px;
+        }
+    </style>
+</head>
+<body>
+    @RenderPage("/Views/Share/nav_quanly.cshtml")
+    <div class="container minheight">
+        <div class="row">
+            <h2 class="text-center text-primary">Kết quả thống kê sản phẩm</h2>
+            <h3>Từ ngày: @ViewBag.tungay</h3>
+            <h3>Tới ngày: @ViewBag.toingay</h3>
+        </div>
+        <br />
+      
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="panel panel-success">
+                    <div class="panel-heading"><h3 class="panel-title">Sinh Tố</h3></div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Số lượng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < list.Count; i++)
+                                {
+                                    if (list[i].loai == 1)
+                                    {
+                                        sinhto = sinhto + list[i].soluong;
+                                        <tr>
+                                            <td>@list[i].tensanpham</td>
+                                            <td>@list[i].soluong</td>
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                        <h3 class="text-primary">Tổng cộng: @sinhto</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="panel panel-success">
+                    <div class="panel-heading"><h3 class="panel-title">Trà Sữa</h3></div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Số lượng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < list.Count; i++)
+                                {
+                                    if (list[i].loai == 2)
+                                    {
+                                        trasua = trasua + list[i].soluong;
+                                        <tr>
+                                            <td>@list[i].tensanpham</td>
+                                            <td>@list[i].soluong</td>
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                        <h3 class="text-primary">Tổng cộng: @trasua</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="panel panel-success">
+                    <div class="panel-heading"><h3 class="panel-title">Sản phẩm khác</h3></div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Số lượng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < list.Count; i++)
+                                {
+                                    if (list[i].loai == 3)
+                                    {
+                                        sanphamkhac = sanphamkhac + list[i].soluong;
+                                        <tr>
+                                            <td>@list[i].tensanpham</td>
+                                            <td>@list[i].soluong</td>
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                        <h3 class="text-primary">Tổng cộng: @sanphamkhac</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="panel panel-success">
+                    <div class="panel-heading"><h3 class="panel-title">Sản phẩm phụ</h3></div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Số lượng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < list.Count; i++)
+                                {
+                                    if (list[i].loai == 4)
+                                    {
+                                        sanphamphu = sanphamphu + list[i].soluong;
+                                        <tr>
+                                            <td>@list[i].tensanpham</td>
+                                            <td>@list[i].soluong</td>
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                        <h3 class="text-primary">Tổng cộng: @sanphamphu</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <h2 class="text-center text-primary">Tất cả: @(sinhto+trasua+sanphamkhac+sanphamphu)</h2>
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+    @RenderPage("/Views/Share/footer.cshtml")
+</body>
+</html>

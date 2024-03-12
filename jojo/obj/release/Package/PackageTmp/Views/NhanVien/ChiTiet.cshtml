@@ -1,0 +1,96 @@
+﻿@using jojo.Models
+@{
+    Layout = null;
+    nhanvien nv = ViewBag.nhanvien as nhanvien;
+    nhanvien nv2 = ViewBag.nhanvien2 as nhanvien;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="/image/jojo.ico">
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <title>ChiTietNhanVien</title>
+    <style>
+        .mypadding tr td {
+            padding: 8px;
+        }
+
+      
+    </style>
+</head>
+<body>
+    @RenderPage("/Views/Share/nav_quanly.cshtml")
+    <div class="container">
+        <div class="panel panel-info">
+            <div class="panel-heading"><h3 class="panel-title">Thông tin chi tiết nhân viên</h3></div>
+            <div class="panel-body">
+                <table class="mypadding">
+                    <tbody>
+                        <tr>
+                            <td>Id</td>
+                            <td>@nv2.id</td>
+                        </tr>
+                        <tr>
+                            <td>Họ và tên</td>
+                            <td>@nv2.hovaten</td>
+                        </tr>
+                        <tr>
+                            <td>Giới tính</td>
+                            <td>@nv2.gioitinh</td>
+                        </tr>
+                        <tr>
+                            <td>Ngày sinh</td>
+                            <td>@nv2.ngaysinh</td>
+                        </tr>
+                        <tr>
+                            <td>Số điện thoại</td>
+                            <td>@nv2.sodienthoai</td>
+                        </tr>
+                        <tr>
+                            <td>Địa chỉ</td>
+                            <td>@nv2.diachi</td>
+                        </tr>
+                        <tr>
+                            <td>Chứng minh thư</td>
+                            <td>@nv2.cmnd</td>
+                        </tr>
+                        <tr>
+                            <td>Ngày vào làm</td>
+                            <td>@nv2.ngayvaolam</td>
+                        </tr>
+                        <tr>
+                            <td>Công việc</td>
+                            <td>@nv2.congviec</td>
+                        </tr>
+                        @if (nv.loai == 1)
+                        {
+                            <tr>
+                                <td>Loại tài khoản</td>
+                                <td>Nhân viên</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>Loại tài khoản</td>
+                                <td>Quản lý</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td>Tài khoản</td>
+                            <td>@nv2.taikhoan</td>
+                        </tr>
+                        <tr>
+                            <td>Mật khẩu</td>
+                            <td>**********</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    @RenderPage("/Views/Share/footer.cshtml")
+</body>
+</html>

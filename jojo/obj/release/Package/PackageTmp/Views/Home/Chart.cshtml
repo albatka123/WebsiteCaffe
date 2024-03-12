@@ -1,0 +1,402 @@
+﻿@using jojo.Models;
+@model jojo.DTO.Chart
+@{
+    Layout = null;
+    nhanvien nv = ViewBag.nhanvien as nhanvien;
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="/image/jojo.ico">
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="/Content/src/bootstrap-tagsinput.css" type="text/css" />
+
+
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/Scripts/moment.min.js"></script>
+    <script src="/Content/src/bootstrap-tagsinput.js"></script>
+    <title>JoJo</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+    google.load("visualization", "1", { packages: ["corechart"] });
+    google.setOnLoadCallback(draw);
+
+
+    function draw() {
+        drawWeekChart();
+        drawMonthChart();
+    }
+
+    function drawMonthChart() {
+        // Create and populate the data table.
+        var doanhthus = [@Model.MonthDoanhThu];
+        var chiphis = [@Model.MonthChiPhi];
+        var data = new google.visualization.DataTable();
+
+        data.addColumn('string', 'Month');
+        data.addColumn('number', 'Doanh Thu');
+        data.addColumn('number', 'Chi Phi');
+
+        data.addRow(["Jan", doanhthus[0], chiphis[0]]);
+        data.addRow(["Feb", doanhthus[1], chiphis[1]]);
+        data.addRow(["Mar", doanhthus[2], chiphis[2]]);
+        data.addRow(["Apr", doanhthus[3], chiphis[3]]);
+        data.addRow(["May", doanhthus[4], chiphis[4]]);
+        data.addRow(["Jun", doanhthus[5], chiphis[5]]);
+        data.addRow(["Jul", doanhthus[6], chiphis[6]]);
+        data.addRow(["Aug", doanhthus[7], chiphis[7]]);
+        data.addRow(["Sep", doanhthus[8], chiphis[8]]);
+        data.addRow(["Oct", doanhthus[9], chiphis[9]]);
+        data.addRow(["Nov", doanhthus[10], chiphis[10]]);
+        data.addRow(["Dec", doanhthus[11], chiphis[11]]);
+
+        var options = {
+            title: 'Thống kê doanh thu & chi phí trong năm',
+            legend: 'bottom',
+            vAxis: { minValue: 0, viewWindow: {
+                min:0
+            }, title: 'VNĐ', titleTextStyle: { color: 'blue' } },
+            animation: { duration: 3500, easing: 'out', startup: true }
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div_month'));
+        chart.draw(data, options);
+    }
+
+        function drawWeekChart() {
+            // Create and populate the data table.
+            var doanhthus = [@Model.WeekDoanhThu];
+            var data = new google.visualization.DataTable();
+
+            data.addColumn('string', 'Month');
+            data.addColumn('number', 'Doanh Thu');
+
+            data.addRow(["Mon", doanhthus[0]]);
+            data.addRow(["Tue", doanhthus[1]]);
+            data.addRow(["Wed", doanhthus[2]]);
+            data.addRow(["Thu", doanhthus[3]]);
+            data.addRow(["Fri", doanhthus[4]]);
+            data.addRow(["Sat", doanhthus[5]]);
+            data.addRow(["Sun", doanhthus[6]]);
+
+            var options = {
+                title: 'Thống kê doanh thu trong tuần',
+                legend: 'bottom',
+                vAxis: { minValue: 0, viewWindow: {
+                    min:0
+                }, title: 'VNĐ', titleTextStyle: { color: 'blue' } },
+                animation: { duration: 2500, easing: 'out', startup: true }
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div_week'));
+            chart.draw(data, options);
+        }
+
+        $(document).ready(function () {
+
+            $(document).ajaxStart(function () {
+               
+                $("#loading").css("display", "block");
+               
+            });
+            $(document).ajaxComplete(function () {
+                $("#loading").css("display", "none");
+               
+                $("#chart_div_year").css("visibility", "visible");
+                $("#chart_div_date").css("visibility", "visible");
+            });
+
+            $('#GetMyChart').click(function () {
+                var years = $("#tags").tagsinput('items');
+                if (years.length > 0) {
+                    var pat = /^([2]{1})+([0-9]{3})$/;
+                    var k = -1;
+                    for (var i = 0; i < years.length; i++) {
+
+                        if (!pat.test(years[i])) {
+                            k = i;
+                            break;
+                        }
+                    }
+
+                    if (k != -1) {
+                        alert("Nam khong hop le: " + years[k]);
+                    } else {
+                        $("#chart_div_year").css("visibility", "hidden");
+                        CallAjax(years);
+                    }
+                }
+            });
+
+            function CallAjax(years) {
+
+                $.ajax({
+                    type: "POST",
+                    data: { years: years },
+                    url: "/Home/Year",
+                    success: function (chart) {
+
+                        drawYearChart(chart,years);
+                    }
+                });
+            }
+
+            function drawYearChart(chart,years) {
+                // Create and populate the data table.
+
+                var doanhthus = chart.YearDoanhThu.split(",");
+                var chiphis = chart.YearChiPhi.split(",");
+                var data = new google.visualization.DataTable();
+
+                data.addColumn('string', 'Year');
+                data.addColumn('number', 'Doanh Thu');
+                data.addColumn('number', 'Chi Phi');
+
+                for (var i = 0; i < years.length; i++) {
+                    data.addRow([years[i], Number(doanhthus[i]), Number(chiphis[i])]);
+                }
+
+                var options = {
+                    title: '',
+                    legend: 'bottom',
+                    vAxis: { minValue: 0, viewWindow: {
+                        min:0
+                    }, title: 'VNĐ', titleTextStyle: { color: 'blue' } },
+                    animation: { duration: 2500, easing: 'out', startup: true }
+                };
+                var chart = new google.visualization.ColumnChart(document.getElementById('chart_div_year'));
+                chart.draw(data, options);
+            }
+
+            $('#GetMyChart2').click(function () {
+                var tungay = $('#tungay').val();
+                var toingay = $('#toingay').val();
+                var date1 = moment(tungay, "YYYY-MM-DD");
+                var date2 = moment(toingay, "YYYY-MM-DD");
+                if (date1 == null || !date1.isValid()) {
+                    alert('"Tu ngay" khong hop le');
+                    return;
+                }
+                if (date2 == null || !date2.isValid()) {
+                    alert('"Toi ngay" khong hop le');
+                    return;
+                }
+
+                if (date1.isAfter(date2)) {
+                    alert('"Tu ngay" > "Toi ngay" la khong hop le');
+                    return;
+                }
+
+                var count = date2.diff(date1, 'days') + 1;
+                if (count > 10) {
+                    alert('Phạm vi thống kê không hợp lệ, chỉ được tối đa là 10 ngày');
+                    return;
+                }
+                $("#chart_div_date").css("visibility", "hidden");
+                CallAjax2(tungay,toingay);
+            });
+
+            function CallAjax2(tungay, toingay) {
+
+                $.ajax({
+                    type: "POST",
+                    data: { tungay: tungay, toingay: toingay },
+                    url: "/Home/Date",
+                    success: function (chart) {
+                        drawDateChart(chart, tungay, toingay);
+                    }
+                });
+            }
+
+            function drawDateChart(chart, tungay, toingay) {
+                // Create and populate the data table.
+
+                var doanhthus = chart.DateDoanhThu.split(",");
+                var date1 = moment(tungay, "YYYY-MM-DD");
+                var date2 = moment(toingay, "YYYY-MM-DD");
+                var data = new google.visualization.DataTable();
+
+                data.addColumn('string', 'Date');
+                data.addColumn('number', 'Doanh Thu');
+                // A column for custom tooltip content
+                data.addColumn({ type: 'string', role: 'tooltip', 'p': { 'html': true } });
+                var z = 0;
+                while (date1.isBefore(date2) || date1.isSame(date2)) {
+                    var date_formated = date1.date().toString() + " " + date1.format("MMM").toString();
+                    var date_formated2 =
+                    date_formated2 = date_formated2 + "</br>";
+                    date_formated2 = date_formated2 + "<b>Doanh Thu: </b>" + " " + doanhthus[z];
+                    data.addRow([date_formated, Number(doanhthus[z]), createCustomHTMLContent(date1, Number(doanhthus[z]))]);
+                    date1.add('days', 1);
+                    z = z + 1;
+                }
+
+
+
+                var options = {
+                    title: '',
+                    legend: 'bottom',
+                    tooltip: { isHtml: true },
+                    vAxis: {
+                        minValue: 0, viewWindow: {
+                            min: 0
+                        }, title: 'VNĐ', titleTextStyle: { color: 'blue' }
+                    },
+                    animation: { duration: 2500, easing: 'out', startup: true }
+                };
+                var chart = new google.visualization.ColumnChart(document.getElementById('chart_div_date'));
+                chart.draw(data, options);
+            }
+
+
+            function createCustomHTMLContent(date1, doanhthu) {
+                Number.prototype.format = function (n, x, s, c) {
+                    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
+                        num = this.toFixed(Math.max(0, ~~n));
+
+                    return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
+                };
+                return '<div style="padding:15px 15px 15px 15px; width:180px; height:100px">' +
+                            '<table cellpadding="2" cellspacing="2">' +
+                                '<tr>' +
+                                    '<td> <b>' + date1.format("dddd").toString() + " " + date1.format("DD/MM/YYYY").toString() + '</b></td>' +
+                                '</tr>' +
+                                '<tr>' +
+                                    '<td>' + "Doanh Thu: " + '<b>' + doanhthu.format(0, 3, '.', ','); + '</b></td>' +
+                                '</tr>' +
+                            '</table>' +
+                        '</div>';
+            }
+
+            $("#goto").hover(function () {
+                $('#myimage').show();
+            }, function () {
+                $('#myimage').hide();
+            });
+
+        });
+
+    </script>
+    <style>
+
+        #loading {
+           display:none;
+            background-color: rgba(200,200,200,0.3);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* or auto or scroll */
+        }
+
+            #loading img {
+                width: 50px;
+                height: 50px;
+                margin: auto;
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+            }
+
+        #myimage {
+            width: 100px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    @RenderPage("/Views/Share/nav_quanly.cshtml")
+
+    <div class="container">
+
+        <div class="row">
+            <div class="text-center">
+                <a href="/KinhDoanh" id="goto" class="btn btn-primary btn-lg">
+                    <span class="glyphicon glyphicon-arrow-right"></span> Go to Store
+                    <img id="myimage" src="/image/01-progress.gif" style="width:40px;height:30px;display:none">
+                </a>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div id="chart_div_week" style="height:500px">
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div id="chart_div_month" style="height: 500px;">
+
+            </div>
+        </div>
+        <br />
+
+
+        <div class="row">
+            <h3 class="text-center text-primary">Thống kê doanh thu & chi phi theo ngày</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-offset-3 col-sm-6">
+                <div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Từ Ngày</label>
+                        <div class="col-sm-7">
+                            <input type="date" name="tungay" id="tungay" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Tới Ngày</label>
+                        <div class="col-sm-7">
+                            <input type="date" name="toingay" id="toingay" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3"></label>
+                        <div class="col-sm-3">
+                            <input type="submit" class="form-control" value="Xác nhận" id="GetMyChart2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="chart_div_date" style="height: 500px;">
+
+        </div>
+        <br /><br />
+        <div class="row">
+            <h3 class="text-center text-primary">Thống kê doanh thu & chi phi theo năm</h3>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-offset-3 col-sm-6">
+                <input type="text" id="tags" value="@DateTime.Now.Year" data-role="tagsinput">
+            </div>
+            <div class="col-sm-3">
+                <button class="btn btn-default" id="GetMyChart">Submit</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div id="chart_div_year" style="height: 500px;">
+
+            </div>
+        </div>
+
+
+        <div id="loading">
+            <img src="/image/loader.gif" />
+        </div>
+    </div>
+
+    @RenderPage("/Views/Share/footer.cshtml")
+</body>
+</html>

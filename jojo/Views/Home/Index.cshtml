@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="~/image/caffe.ico">
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+
+    <title>Cafe</title>
+    <style>
+        .mypanel {
+            min-height: 400px;
+        }
+        body {
+            background: url("../image/cafephongnen.png");
+            background-size: cover;
+        }
+        h2{
+            margin-top: 40px;
+        }
+        #allform{
+           height:500px;
+           width:550px;
+        }
+    </style>
+</head>
+<body>
+    <br />
+    <div class="container text-center">
+        
+        <h2 class="text" style="color:sandybrown">WELCOME TO CAFE STORE</h2>
+    </div>
+    <br /><br />
+    <div class="container" >
+        <div class="row">
+
+            <div class="col-sm-offset-3 col-sm-6">
+                <div class="panel panel-info mypanel" id="allform">
+                    <div class="panel-heading" style="background-color: saddlebrown">
+                    <h3 class="panel-title" style="color: sandybrown; margin-left: 200px">ĐĂNG NHẬP</h3></div>
+                    <div class="panel-body" >
+                        <div class="text-center">
+                            <img src="~/image/caffelogo.jpg">
+                        </div>
+                        <br><br>
+                        <form class="form-horizontal" action="/Home/Login" method="post">
+                            <div class="form-group">
+                                <label class="control-label col-sm-3">Tài khoản</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" id="taikhoan" name="taikhoan">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3">Mật khẩu</label>
+                                <div class="col-sm-7">
+                                    <input type="password" class="form-control" id="matkhau" name="matkhau">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3"></label>
+                                <div class="col-sm-7">
+                                    <input type="submit" class="form-control btn-primary" value="Đăng Nhập">
+                                </div>
+                            </div>
+                        </form>
+                        <br><br>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+ 
+</body>
+
+</html>

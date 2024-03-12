@@ -1,0 +1,114 @@
+﻿@using jojo.Models;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<jojo.Models.chiphi>
+@{
+    Layout = null;
+    nhanvien nv = ViewBag.nhanvien as nhanvien;
+    List<loaichiphi> loaichiphis = ViewBag.loaichiphis as List<loaichiphi>;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="/image/jojo.ico">
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <title>ChiPhi</title>
+    <script>
+       
+
+
+        function xoa(id) {
+            var url = '/chiphi/Xoachiphi?id=' + id;
+            var r = confirm("Are you sure to delete it!");
+            if (r == true) {
+                window.location = url;
+            } 
+        }
+    </script>
+
+    <style>
+        .minheight{
+            min-height:370px;
+        }
+    </style>
+</head>
+<body>
+    @RenderPage("/Views/Share/nav_quanly.cshtml")
+    <div class="container minheight">
+      
+        <div class="row">
+            <div class="pull-right">
+                <a href="/ChiPhi/ThemChiPhi" class="btn btn-primary btn-lg">Thêm Chi Phí</a>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Ngày</th>
+                        <th>Loại Chi phí</th>
+                        <th>chi phí</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        var i = 0;
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@(i + 1)</td>
+                                <td>@item.ngay.ToString("dd/MM/yyyy")</td>
+                                <td>@item.loaichiphi.tenchiphi</td>
+                                <td>@item.chiphi1 </td>
+                                <td>
+                                    <a class="btn btn-success" href="/chiphi/CapNhat?id=@item.id"><span class="glyphicon glyphicon-retweet"></span></a>
+                                    <button class="btn btn-danger" onclick="xoa('@item.id')"><span class="glyphicon glyphicon-trash"></span></button>
+                                </td>
+
+                            </tr>
+                            i = i + 1;
+                        }
+                    }
+
+                </tbody>
+            </table>
+
+
+        </div>
+
+        <br />
+
+        <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("", new { page }))
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+    
+
+    
+    
+
+    @RenderPage("/Views/Share/footer.cshtml")
+</body>
+</html>

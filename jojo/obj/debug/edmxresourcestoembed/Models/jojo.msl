@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="freejojo1ModelStoreContainer" CdmEntityContainer="jojoContext">
+    <EntitySetMapping Name="admins">
+      <EntityTypeMapping TypeName="freejojo1Model.admin">
+        <MappingFragment StoreEntitySet="admin">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="matkhau" ColumnName="matkhau" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bangphus">
+      <EntityTypeMapping TypeName="freejojo1Model.bangphu">
+        <MappingFragment StoreEntitySet="bangphu">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idchitiethd" ColumnName="idchitiethd" />
+          <ScalarProperty Name="idsanpham" ColumnName="idsanpham" />
+          <ScalarProperty Name="soluong" ColumnName="soluong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bangxoahoadons">
+      <EntityTypeMapping TypeName="freejojo1Model.bangxoahoadon">
+        <MappingFragment StoreEntitySet="bangxoahoadon">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idhoadon" ColumnName="idhoadon" />
+          <ScalarProperty Name="idnhanvien" ColumnName="idnhanvien" />
+          <ScalarProperty Name="ngay" ColumnName="ngay" />
+          <ScalarProperty Name="active" ColumnName="active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="chiphis">
+      <EntityTypeMapping TypeName="freejojo1Model.chiphi">
+        <MappingFragment StoreEntitySet="chiphi">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idloaichiphi" ColumnName="idloaichiphi" />
+          <ScalarProperty Name="ngay" ColumnName="ngay" />
+          <ScalarProperty Name="chiphi1" ColumnName="chiphi" />
+          <ScalarProperty Name="active" ColumnName="active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="chitiethoadons">
+      <EntityTypeMapping TypeName="freejojo1Model.chitiethoadon">
+        <MappingFragment StoreEntitySet="chitiethoadon">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idhoadon" ColumnName="idhoadon" />
+          <ScalarProperty Name="idspchinh" ColumnName="idspchinh" />
+          <ScalarProperty Name="soluong" ColumnName="soluong" />
+          <ScalarProperty Name="thanhtien" ColumnName="thanhtien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hoadons">
+      <EntityTypeMapping TypeName="freejojo1Model.hoadon">
+        <MappingFragment StoreEntitySet="hoadon">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="tongtien" ColumnName="tongtien" />
+          <ScalarProperty Name="idkhachhang" ColumnName="idkhachhang" />
+          <ScalarProperty Name="idnhanvien" ColumnName="idnhanvien" />
+          <ScalarProperty Name="ngayhoadon" ColumnName="ngayhoadon" />
+          <ScalarProperty Name="giamgia" ColumnName="giamgia" />
+          <ScalarProperty Name="khachphaitra" ColumnName="khachphaitra" />
+          <ScalarProperty Name="active" ColumnName="active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="khachhangs">
+      <EntityTypeMapping TypeName="freejojo1Model.khachhang">
+        <MappingFragment StoreEntitySet="khachhang">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="tenkhachhang" ColumnName="tenkhachhang" />
+          <ScalarProperty Name="sodienthoai" ColumnName="sodienthoai" />
+          <ScalarProperty Name="diachi" ColumnName="diachi" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="ghichu" ColumnName="ghichu" />
+          <ScalarProperty Name="trangthai" ColumnName="trangthai" />
+          <ScalarProperty Name="active" ColumnName="active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="loaichiphis">
+      <EntityTypeMapping TypeName="freejojo1Model.loaichiphi">
+        <MappingFragment StoreEntitySet="loaichiphi">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="tenchiphi" ColumnName="tenchiphi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="nhanviens">
+      <EntityTypeMapping TypeName="freejojo1Model.nhanvien">
+        <MappingFragment StoreEntitySet="nhanvien">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="matkhau" ColumnName="matkhau" />
+          <ScalarProperty Name="hovaten" ColumnName="hovaten" />
+          <ScalarProperty Name="gioitinh" ColumnName="gioitinh" />
+          <ScalarProperty Name="ngaysinh" ColumnName="ngaysinh" />
+          <ScalarProperty Name="sodienthoai" ColumnName="sodienthoai" />
+          <ScalarProperty Name="diachi" ColumnName="diachi" />
+          <ScalarProperty Name="cmnd" ColumnName="cmnd" />
+          <ScalarProperty Name="ngayvaolam" ColumnName="ngayvaolam" />
+          <ScalarProperty Name="congviec" ColumnName="congviec" />
+          <ScalarProperty Name="taikhoan" ColumnName="taikhoan" />
+          <ScalarProperty Name="loai" ColumnName="loai" />
+          <ScalarProperty Name="active" ColumnName="active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sanphams">
+      <EntityTypeMapping TypeName="freejojo1Model.sanpham">
+        <MappingFragment StoreEntitySet="sanpham">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ten" ColumnName="ten" />
+          <ScalarProperty Name="gia" ColumnName="gia" />
+          <ScalarProperty Name="loai" ColumnName="loai" />
+          <ScalarProperty Name="active" ColumnName="active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sanphamphus">
+      <EntityTypeMapping TypeName="freejojo1Model.sanphamphu">
+        <MappingFragment StoreEntitySet="sanphamphu">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ten" ColumnName="ten" />
+          <ScalarProperty Name="gia" ColumnName="gia" />
+          <ScalarProperty Name="active" ColumnName="active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

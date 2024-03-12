@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="freejojo1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="matkhau" Type="nvarchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bangphu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idchitiethd" Type="int" Nullable="false" />
+    <Property Name="idsanpham" Type="int" Nullable="false" />
+    <Property Name="soluong" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bangxoahoadon">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idhoadon" Type="int" Nullable="false" />
+    <Property Name="idnhanvien" Type="int" Nullable="false" />
+    <Property Name="ngay" Type="datetime" Nullable="false" />
+    <Property Name="active" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="chiphi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idloaichiphi" Type="int" Nullable="false" />
+    <Property Name="ngay" Type="datetime" Nullable="false" />
+    <Property Name="chiphi" Type="int" Nullable="false" />
+    <Property Name="active" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="chitiethoadon">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idhoadon" Type="int" Nullable="false" />
+    <Property Name="idspchinh" Type="int" Nullable="false" />
+    <Property Name="soluong" Type="int" Nullable="false" />
+    <Property Name="thanhtien" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="hoadon">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tongtien" Type="int" Nullable="false" />
+    <Property Name="idkhachhang" Type="int" Nullable="false" />
+    <Property Name="idnhanvien" Type="int" Nullable="false" />
+    <Property Name="ngayhoadon" Type="datetime" Nullable="false" />
+    <Property Name="giamgia" Type="int" Nullable="false" />
+    <Property Name="khachphaitra" Type="int" Nullable="false" />
+    <Property Name="active" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="khachhang">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tenkhachhang" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="sodienthoai" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="diachi" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ghichu" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="trangthai" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="active" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="loaichiphi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tenchiphi" Type="nvarchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <EntityType Name="nhanvien">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="matkhau" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="hovaten" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="gioitinh" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ngaysinh" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sodienthoai" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="diachi" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="cmnd" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ngayvaolam" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="congviec" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="taikhoan" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="loai" Type="int" Nullable="false" />
+    <Property Name="active" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sanpham">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ten" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="gia" Type="int" Nullable="false" />
+    <Property Name="loai" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="active" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sanphamphu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ten" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="gia" Type="int" Nullable="false" />
+    <Property Name="active" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__bangphu__idchiti__36B12243">
+    <End Role="chitiethoadon" Type="Self.chitiethoadon" Multiplicity="1" />
+    <End Role="bangphu" Type="Self.bangphu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="chitiethoadon">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bangphu">
+        <PropertyRef Name="idchitiethd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bangphu__idsanph__37A5467C">
+    <End Role="sanphamphu" Type="Self.sanphamphu" Multiplicity="1" />
+    <End Role="bangphu" Type="Self.bangphu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sanphamphu">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bangphu">
+        <PropertyRef Name="idsanpham" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bangxoaho__idhoa__38996AB5">
+    <End Role="hoadon" Type="Self.hoadon" Multiplicity="1" />
+    <End Role="bangxoahoadon" Type="Self.bangxoahoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hoadon">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bangxoahoadon">
+        <PropertyRef Name="idhoadon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bangxoaho__idnha__398D8EEE">
+    <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="1" />
+    <End Role="bangxoahoadon" Type="Self.bangxoahoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="nhanvien">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bangxoahoadon">
+        <PropertyRef Name="idnhanvien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__chiphi__idloaich__3A81B327">
+    <End Role="loaichiphi" Type="Self.loaichiphi" Multiplicity="1" />
+    <End Role="chiphi" Type="Self.chiphi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="loaichiphi">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="chiphi">
+        <PropertyRef Name="idloaichiphi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__chitietho__idhoa__3B75D760">
+    <End Role="hoadon" Type="Self.hoadon" Multiplicity="1" />
+    <End Role="chitiethoadon" Type="Self.chitiethoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hoadon">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="chitiethoadon">
+        <PropertyRef Name="idhoadon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__chitietho__idspc__3C69FB99">
+    <End Role="sanpham" Type="Self.sanpham" Multiplicity="1" />
+    <End Role="chitiethoadon" Type="Self.chitiethoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sanpham">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="chitiethoadon">
+        <PropertyRef Name="idspchinh" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__hoadon__idkhachh__3D5E1FD2">
+    <End Role="khachhang" Type="Self.khachhang" Multiplicity="1" />
+    <End Role="hoadon" Type="Self.hoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="khachhang">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="hoadon">
+        <PropertyRef Name="idkhachhang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__hoadon__idnhanvi__3E52440B">
+    <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="1" />
+    <End Role="hoadon" Type="Self.hoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="nhanvien">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="hoadon">
+        <PropertyRef Name="idnhanvien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="freejojo1ModelStoreContainer">
+    <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="bangphu" EntityType="Self.bangphu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="bangxoahoadon" EntityType="Self.bangxoahoadon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="chiphi" EntityType="Self.chiphi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="chitiethoadon" EntityType="Self.chitiethoadon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="hoadon" EntityType="Self.hoadon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="khachhang" EntityType="Self.khachhang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="loaichiphi" EntityType="Self.loaichiphi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="nhanvien" EntityType="Self.nhanvien" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sanpham" EntityType="Self.sanpham" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sanphamphu" EntityType="Self.sanphamphu" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__bangphu__idchiti__36B12243" Association="Self.FK__bangphu__idchiti__36B12243">
+      <End Role="chitiethoadon" EntitySet="chitiethoadon" />
+      <End Role="bangphu" EntitySet="bangphu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bangphu__idsanph__37A5467C" Association="Self.FK__bangphu__idsanph__37A5467C">
+      <End Role="sanphamphu" EntitySet="sanphamphu" />
+      <End Role="bangphu" EntitySet="bangphu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bangxoaho__idhoa__38996AB5" Association="Self.FK__bangxoaho__idhoa__38996AB5">
+      <End Role="hoadon" EntitySet="hoadon" />
+      <End Role="bangxoahoadon" EntitySet="bangxoahoadon" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bangxoaho__idnha__398D8EEE" Association="Self.FK__bangxoaho__idnha__398D8EEE">
+      <End Role="nhanvien" EntitySet="nhanvien" />
+      <End Role="bangxoahoadon" EntitySet="bangxoahoadon" />
+    </AssociationSet>
+    <AssociationSet Name="FK__chiphi__idloaich__3A81B327" Association="Self.FK__chiphi__idloaich__3A81B327">
+      <End Role="loaichiphi" EntitySet="loaichiphi" />
+      <End Role="chiphi" EntitySet="chiphi" />
+    </AssociationSet>
+    <AssociationSet Name="FK__chitietho__idhoa__3B75D760" Association="Self.FK__chitietho__idhoa__3B75D760">
+      <End Role="hoadon" EntitySet="hoadon" />
+      <End Role="chitiethoadon" EntitySet="chitiethoadon" />
+    </AssociationSet>
+    <AssociationSet Name="FK__chitietho__idspc__3C69FB99" Association="Self.FK__chitietho__idspc__3C69FB99">
+      <End Role="sanpham" EntitySet="sanpham" />
+      <End Role="chitiethoadon" EntitySet="chitiethoadon" />
+    </AssociationSet>
+    <AssociationSet Name="FK__hoadon__idkhachh__3D5E1FD2" Association="Self.FK__hoadon__idkhachh__3D5E1FD2">
+      <End Role="khachhang" EntitySet="khachhang" />
+      <End Role="hoadon" EntitySet="hoadon" />
+    </AssociationSet>
+    <AssociationSet Name="FK__hoadon__idnhanvi__3E52440B" Association="Self.FK__hoadon__idnhanvi__3E52440B">
+      <End Role="nhanvien" EntitySet="nhanvien" />
+      <End Role="hoadon" EntitySet="hoadon" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

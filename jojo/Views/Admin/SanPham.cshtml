@@ -1,0 +1,149 @@
+﻿@using Cafe.Models
+@using Cafe.DTO
+@{
+    Layout = null;
+    List<sanpham> sanphams = ViewBag.sanpham as List<sanpham>;
+    List<sanphamphu> sanphamphus = ViewBag.sanphamphu as List<sanphamphu>;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <title>CapNhatSanPham</title>
+    <style>
+        .table-hover tr:hover {
+            cursor: pointer
+        }
+    </style>
+</head>
+<body>
+    @RenderPage("/Views/Share/nav_admin.cshtml")
+    <div class="container">
+        <div class="row">
+            <div class="pull-right">
+                <a href="/Admin/ThemSanPham" type="button" class="btn btn-success btn-lg">Thêm Sản Phẩm</a>
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="panel panel-success">
+                    <div class="panel-heading"><h3 class="panel-title">Cà phê đặc biệt</h3></div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < sanphams.Count; i++)
+                                {
+                                    if (sanphams[i].loai == "1")
+                                    {
+                                        <tr onclick="window.location = '/Admin/CapNhatSanPhamChinh?id=@sanphams[i].id'">
+                                            <td>@sanphams[i].ten</td>
+                                            <td>@sanphams[i].gia</td>
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="panel panel-success">
+                    <div class="panel-heading"><h3 class="panel-title">Cà phê truyền thống</h3></div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < sanphams.Count; i++)
+                                {
+                                    if (sanphams[i].loai == "2")
+                                    {
+                                        <tr onclick="window.location = '/Admin/CapNhatSanPhamChinh?id=@sanphams[i].id'">
+                                            <td>@sanphams[i].ten</td>
+                                            <td>@sanphams[i].gia</td>
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="panel panel-success">
+                    <div class="panel-heading"><h3 class="panel-title">Sản phẩm khác</h3></div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < sanphams.Count; i++)
+                                {
+                                    if (sanphams[i].loai == "3")
+                                    {
+                                        <tr onclick="window.location = '/Admin/CapNhatSanPhamChinh?id=@sanphams[i].id'">
+                                            <td>@sanphams[i].ten</td>
+                                            <td>@sanphams[i].gia</td>
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="panel panel-success">
+                    <div class="panel-heading"><h3 class="panel-title">Sản phẩm phụ</h3></div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < sanphamphus.Count; i++)
+                                {
+                                    <tr onclick="window.location = '/Admin/CapNhatSanPhamPhu?id=@sanphamphus[i].id'">
+                                        <td>@sanphamphus[i].ten</td>
+                                        <td>@sanphamphus[i].gia</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+</body>
+</html>

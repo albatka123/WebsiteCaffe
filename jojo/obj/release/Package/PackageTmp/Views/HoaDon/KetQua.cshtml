@@ -1,0 +1,136 @@
+﻿@using jojo.Models;
+@{
+    Layout = null;
+    nhanvien nv = ViewBag.nhanvien as nhanvien;
+    List<hoadon> hoadons = ViewBag.hoadons as List<hoadon>;
+    var khachphaitra = 0;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="/image/jojo.ico">
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <title>HoaDon</title>
+    <style>
+        .mypanel {
+            min-height: 250px;
+            padding: 25px;
+        }
+
+        .mytable tr td {
+            padding: 8px;
+        }
+
+        .borderless td, .borderless th {
+            border: none;
+        }
+        .minheight{
+            min-height:370px;
+        }
+    </style>
+</head>
+<body>
+    @if (nv.loai == 1)
+    {
+        @RenderPage("/Views/Share/nav_nhanvien.cshtml")
+    }
+    else
+    {
+        @RenderPage("/Views/Share/nav_quanly.cshtml")
+    }
+    <div class="container minheight">
+        <h3>Ngày: @ViewBag.ngay</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Thời điểm</th>
+                    <th>Nhân viên bán</th>
+                    <th>Khách hàng</th>
+                    <th>Tổng tiền</th>
+                    <th>Giảm giá</th>
+                    <th>Khách phải trả</th>
+                    <th>Chi tiết</th>
+                    @if (nv.loai == 2)
+                    {
+                        <th>Xóa</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < hoadons.Count; i++)
+                {
+                    var h = "chitiet" + i;
+                    var h2 = '#' + h;
+                    khachphaitra = khachphaitra + hoadons[i].khachphaitra;
+                    <tr>
+                        <td>@(i+1)</td>
+                        <td>@hoadons[i].ngayhoadon.ToShortTimeString()</td>
+                        <td>@hoadons[i].nhanvien.hovaten</td>
+                        <td>@hoadons[i].khachhang.tenkhachhang</td>
+                        <td>@hoadons[i].tongtien</td>
+                        <td>@hoadons[i].giamgia</td>
+                        <td>@hoadons[i].khachphaitra</td>
+                        <td><button data-toggle="collapse" class="btn btn-info" data-target="@h2"><span class="glyphicon glyphicon-plus"></span></button></td>
+                        @if (nv.loai == 2)
+                        {
+                            <td><a class="btn btn-danger" href="/HoaDon/Xoahoadon?id=@hoadons[i].id&ngay=@ViewBag.ngay"><span class="glyphicon glyphicon-remove"></span></a></td>
+                        }
+                        
+                    </tr>
+                    <tr id="@h" class="collapse">
+                        <td colspan="6">
+                            <div class="panel panel-info mypanel">
+                                <table class="table borderless">
+                                    <tr>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn giá</th>
+                                        <th>Thành tiền</th>
+                                        <th>Tổng tiền</th>
+                                    </tr>
+                                    @if (hoadons[i].chitiethoadons != null)
+                                    {
+                                        foreach (chitiethoadon chitiet in hoadons[i].chitiethoadons)
+                                        {
+                                            <tr>
+                                                <td>@chitiet.sanpham.ten</td>
+                                                <td>@chitiet.soluong</td>
+                                                <td>@chitiet.sanpham.gia</td>
+                                                <td>@(chitiet.soluong * chitiet.sanpham.gia)</td>
+                                                <td>@chitiet.thanhtien</td>
+                                            </tr>
+                                            if (chitiet.bangphus != null)
+                                            {
+                                                foreach (bangphu phu in chitiet.bangphus)
+                                                {
+                                                    <tr>
+                                                        <td style="text-indent:10px;">+ @phu.sanphamphu.ten</td>
+                                                        <td>@phu.soluong</td>
+                                                        <td>@phu.sanphamphu.gia</td>
+                                                        <td>@(phu.soluong * phu.sanphamphu.gia)</td>
+                                                    </tr>
+                                                }      
+                                                        
+                                           }
+                                        }
+                                    }
+
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <h3 class="text-info">Tổng tiền: @khachphaitra</h3>
+    </div>
+
+    @RenderPage("/Views/Share/footer.cshtml")
+</body>
+</html>

@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="freejojo1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="matkhau" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bangphu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idchitiethd" Type="Int32" Nullable="false" />
+    <Property Name="idsanpham" Type="Int32" Nullable="false" />
+    <Property Name="soluong" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="chitiethoadon" Relationship="Self.FK__bangphu__idchiti__36B12243" FromRole="bangphu" ToRole="chitiethoadon" />
+    <NavigationProperty Name="sanphamphu" Relationship="Self.FK__bangphu__idsanph__37A5467C" FromRole="bangphu" ToRole="sanphamphu" />
+  </EntityType>
+  <EntityType Name="bangxoahoadon">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idhoadon" Type="Int32" Nullable="false" />
+    <Property Name="idnhanvien" Type="Int32" Nullable="false" />
+    <Property Name="ngay" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="active" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="hoadon" Relationship="Self.FK__bangxoaho__idhoa__38996AB5" FromRole="bangxoahoadon" ToRole="hoadon" />
+    <NavigationProperty Name="nhanvien" Relationship="Self.FK__bangxoaho__idnha__398D8EEE" FromRole="bangxoahoadon" ToRole="nhanvien" />
+  </EntityType>
+  <EntityType Name="chiphi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idloaichiphi" Type="Int32" Nullable="false" />
+    <Property Name="ngay" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="chiphi1" Type="Int32" Nullable="false" />
+    <Property Name="active" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="loaichiphi" Relationship="Self.FK__chiphi__idloaich__3A81B327" FromRole="chiphi" ToRole="loaichiphi" />
+  </EntityType>
+  <EntityType Name="chitiethoadon">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idhoadon" Type="Int32" Nullable="false" />
+    <Property Name="idspchinh" Type="Int32" Nullable="false" />
+    <Property Name="soluong" Type="Int32" Nullable="false" />
+    <Property Name="thanhtien" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="bangphus" Relationship="Self.FK__bangphu__idchiti__36B12243" FromRole="chitiethoadon" ToRole="bangphu" />
+    <NavigationProperty Name="hoadon" Relationship="Self.FK__chitietho__idhoa__3B75D760" FromRole="chitiethoadon" ToRole="hoadon" />
+    <NavigationProperty Name="sanpham" Relationship="Self.FK__chitietho__idspc__3C69FB99" FromRole="chitiethoadon" ToRole="sanpham" />
+  </EntityType>
+  <EntityType Name="hoadon">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tongtien" Type="Int32" Nullable="false" />
+    <Property Name="idkhachhang" Type="Int32" Nullable="false" />
+    <Property Name="idnhanvien" Type="Int32" Nullable="false" />
+    <Property Name="ngayhoadon" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="giamgia" Type="Int32" Nullable="false" />
+    <Property Name="khachphaitra" Type="Int32" Nullable="false" />
+    <Property Name="active" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="bangxoahoadons" Relationship="Self.FK__bangxoaho__idhoa__38996AB5" FromRole="hoadon" ToRole="bangxoahoadon" />
+    <NavigationProperty Name="chitiethoadons" Relationship="Self.FK__chitietho__idhoa__3B75D760" FromRole="hoadon" ToRole="chitiethoadon" />
+    <NavigationProperty Name="khachhang" Relationship="Self.FK__hoadon__idkhachh__3D5E1FD2" FromRole="hoadon" ToRole="khachhang" />
+    <NavigationProperty Name="nhanvien" Relationship="Self.FK__hoadon__idnhanvi__3E52440B" FromRole="hoadon" ToRole="nhanvien" />
+  </EntityType>
+  <EntityType Name="khachhang">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tenkhachhang" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="sodienthoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="diachi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ghichu" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="trangthai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="active" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="hoadons" Relationship="Self.FK__hoadon__idkhachh__3D5E1FD2" FromRole="khachhang" ToRole="hoadon" />
+  </EntityType>
+  <EntityType Name="loaichiphi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tenchiphi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="chiphis" Relationship="Self.FK__chiphi__idloaich__3A81B327" FromRole="loaichiphi" ToRole="chiphi" />
+  </EntityType>
+  <EntityType Name="nhanvien">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="matkhau" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="hovaten" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="gioitinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ngaysinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="sodienthoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="diachi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cmnd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ngayvaolam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="congviec" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="taikhoan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="loai" Type="Int32" Nullable="false" />
+    <Property Name="active" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="bangxoahoadons" Relationship="Self.FK__bangxoaho__idnha__398D8EEE" FromRole="nhanvien" ToRole="bangxoahoadon" />
+    <NavigationProperty Name="hoadons" Relationship="Self.FK__hoadon__idnhanvi__3E52440B" FromRole="nhanvien" ToRole="hoadon" />
+  </EntityType>
+  <EntityType Name="sanpham">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ten" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="gia" Type="Int32" Nullable="false" />
+    <Property Name="loai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="active" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="chitiethoadons" Relationship="Self.FK__chitietho__idspc__3C69FB99" FromRole="sanpham" ToRole="chitiethoadon" />
+  </EntityType>
+  <EntityType Name="sanphamphu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="gia" Type="Int32" Nullable="false" />
+    <Property Name="active" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="bangphus" Relationship="Self.FK__bangphu__idsanph__37A5467C" FromRole="sanphamphu" ToRole="bangphu" />
+  </EntityType>
+  <Association Name="FK__bangphu__idchiti__36B12243">
+    <End Role="chitiethoadon" Type="Self.chitiethoadon" Multiplicity="1" />
+    <End Role="bangphu" Type="Self.bangphu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="chitiethoadon">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bangphu">
+        <PropertyRef Name="idchitiethd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bangphu__idsanph__37A5467C">
+    <End Role="sanphamphu" Type="Self.sanphamphu" Multiplicity="1" />
+    <End Role="bangphu" Type="Self.bangphu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sanphamphu">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bangphu">
+        <PropertyRef Name="idsanpham" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bangxoaho__idhoa__38996AB5">
+    <End Role="hoadon" Type="Self.hoadon" Multiplicity="1" />
+    <End Role="bangxoahoadon" Type="Self.bangxoahoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hoadon">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bangxoahoadon">
+        <PropertyRef Name="idhoadon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bangxoaho__idnha__398D8EEE">
+    <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="1" />
+    <End Role="bangxoahoadon" Type="Self.bangxoahoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="nhanvien">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bangxoahoadon">
+        <PropertyRef Name="idnhanvien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__chiphi__idloaich__3A81B327">
+    <End Role="loaichiphi" Type="Self.loaichiphi" Multiplicity="1" />
+    <End Role="chiphi" Type="Self.chiphi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="loaichiphi">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="chiphi">
+        <PropertyRef Name="idloaichiphi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__chitietho__idhoa__3B75D760">
+    <End Role="hoadon" Type="Self.hoadon" Multiplicity="1" />
+    <End Role="chitiethoadon" Type="Self.chitiethoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hoadon">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="chitiethoadon">
+        <PropertyRef Name="idhoadon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__chitietho__idspc__3C69FB99">
+    <End Role="sanpham" Type="Self.sanpham" Multiplicity="1" />
+    <End Role="chitiethoadon" Type="Self.chitiethoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sanpham">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="chitiethoadon">
+        <PropertyRef Name="idspchinh" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__hoadon__idkhachh__3D5E1FD2">
+    <End Role="khachhang" Type="Self.khachhang" Multiplicity="1" />
+    <End Role="hoadon" Type="Self.hoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="khachhang">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="hoadon">
+        <PropertyRef Name="idkhachhang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__hoadon__idnhanvi__3E52440B">
+    <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="1" />
+    <End Role="hoadon" Type="Self.hoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="nhanvien">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="hoadon">
+        <PropertyRef Name="idnhanvien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="jojoContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admins" EntityType="Self.admin" />
+    <EntitySet Name="bangphus" EntityType="Self.bangphu" />
+    <EntitySet Name="bangxoahoadons" EntityType="Self.bangxoahoadon" />
+    <EntitySet Name="chiphis" EntityType="Self.chiphi" />
+    <EntitySet Name="chitiethoadons" EntityType="Self.chitiethoadon" />
+    <EntitySet Name="hoadons" EntityType="Self.hoadon" />
+    <EntitySet Name="khachhangs" EntityType="Self.khachhang" />
+    <EntitySet Name="loaichiphis" EntityType="Self.loaichiphi" />
+    <EntitySet Name="nhanviens" EntityType="Self.nhanvien" />
+    <EntitySet Name="sanphams" EntityType="Self.sanpham" />
+    <EntitySet Name="sanphamphus" EntityType="Self.sanphamphu" />
+    <AssociationSet Name="FK__bangphu__idchiti__36B12243" Association="Self.FK__bangphu__idchiti__36B12243">
+      <End Role="chitiethoadon" EntitySet="chitiethoadons" />
+      <End Role="bangphu" EntitySet="bangphus" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bangphu__idsanph__37A5467C" Association="Self.FK__bangphu__idsanph__37A5467C">
+      <End Role="sanphamphu" EntitySet="sanphamphus" />
+      <End Role="bangphu" EntitySet="bangphus" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bangxoaho__idhoa__38996AB5" Association="Self.FK__bangxoaho__idhoa__38996AB5">
+      <End Role="hoadon" EntitySet="hoadons" />
+      <End Role="bangxoahoadon" EntitySet="bangxoahoadons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bangxoaho__idnha__398D8EEE" Association="Self.FK__bangxoaho__idnha__398D8EEE">
+      <End Role="nhanvien" EntitySet="nhanviens" />
+      <End Role="bangxoahoadon" EntitySet="bangxoahoadons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__chiphi__idloaich__3A81B327" Association="Self.FK__chiphi__idloaich__3A81B327">
+      <End Role="loaichiphi" EntitySet="loaichiphis" />
+      <End Role="chiphi" EntitySet="chiphis" />
+    </AssociationSet>
+    <AssociationSet Name="FK__chitietho__idhoa__3B75D760" Association="Self.FK__chitietho__idhoa__3B75D760">
+      <End Role="hoadon" EntitySet="hoadons" />
+      <End Role="chitiethoadon" EntitySet="chitiethoadons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__chitietho__idspc__3C69FB99" Association="Self.FK__chitietho__idspc__3C69FB99">
+      <End Role="sanpham" EntitySet="sanphams" />
+      <End Role="chitiethoadon" EntitySet="chitiethoadons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__hoadon__idkhachh__3D5E1FD2" Association="Self.FK__hoadon__idkhachh__3D5E1FD2">
+      <End Role="khachhang" EntitySet="khachhangs" />
+      <End Role="hoadon" EntitySet="hoadons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__hoadon__idnhanvi__3E52440B" Association="Self.FK__hoadon__idnhanvi__3E52440B">
+      <End Role="nhanvien" EntitySet="nhanviens" />
+      <End Role="hoadon" EntitySet="hoadons" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

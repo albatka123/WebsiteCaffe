@@ -1,0 +1,54 @@
+﻿html{
+    margin: 0;
+}
+body { 
+    margin: 0;
+    color: black; background-color: white;
+    font-family: arial, helvetica, sans-serif;
+}
+
+.header1{
+   font-size: 0.8em;
+   padding:1px;
+}
+
+
+.header2{
+     font-size: 0.6em;
+}
+
+.center{
+    text-align:center;
+}
+
+
+.table1 tr td{
+    font-size: 0.7em;
+    padding-bottom:5px;
+    padding-top:5px;
+    text-align:left;
+    
+}
+
+.table1 tr th{
+     font-size: 0.7em;
+     text-align:left;
+}
+
+.table1 tr td span{
+    font-size:0.7em;
+    margin-left:8px;
+    padding:1px;
+}
+
+.table1{
+    margin-bottom:1px;
+}
+
+
+.header3{
+     font-size: 0.7em;
+     padding:1px;
+}
+
+

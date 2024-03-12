@@ -1,0 +1,130 @@
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\jojo.dll.config
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\jojo.dll
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\jojo.pdb
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\EntityFramework.dll
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\EntityFramework.SqlServer.dll
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\System.Web.Helpers.dll
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\System.Web.Mvc.dll
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\System.Web.Razor.dll
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\System.Web.Webpages.Deployment.dll
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\System.Web.Webpages.dll
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\System.Web.Webpages.Razor.dll
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\EntityFramework.xml
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\EntityFramework.SqlServer.xml
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\System.Web.Razor.xml
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\System.Web.Webpages.xml
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\System.Web.Webpages.Deployment.xml
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\System.Web.Webpages.Razor.xml
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\System.Web.Helpers.xml
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\bin\System.Web.Mvc.xml
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\obj\Release\jojo.dll
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\obj\Release\jojo.pdb
+C:\Users\ThachChiBao\documents\visual studio 2013\Projects\jojo\jojo\obj\Release\jojo.csprojResolveAssemblyReference.cache
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\jojo.dll.config
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\jojo.dll
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\jojo.pdb
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\EntityFramework.dll
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\EntityFramework.SqlServer.dll
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\System.Web.Helpers.dll
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\System.Web.Razor.dll
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\System.Web.Webpages.Deployment.dll
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\System.Web.Webpages.dll
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\System.Web.Webpages.Razor.dll
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\EntityFramework.xml
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\EntityFramework.SqlServer.xml
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\System.Web.Razor.xml
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\System.Web.Webpages.xml
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\System.Web.Webpages.Deployment.xml
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\System.Web.Webpages.Razor.xml
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\System.Web.Helpers.xml
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\obj\Release\jojo.csprojResolveAssemblyReference.cache
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\obj\Release\jojo.dll
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\obj\Release\jojo.pdb
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\System.Web.Mvc.dll
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\System.Web.Mvc.xml
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\PagedList.dll
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\PagedList.Mvc.dll
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\PagedList.xml
+C:\Users\ThachChiBao\Desktop\jojo2\jojo\jojo\bin\PagedList.Mvc.xml
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\jojo.dll.config
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\jojo.dll
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\jojo.pdb
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\EntityFramework.dll
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\EntityFramework.SqlServer.dll
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\PagedList.dll
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\PagedList.Mvc.dll
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\System.Web.Helpers.dll
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\System.Web.Mvc.dll
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\System.Web.Razor.dll
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\System.Web.WebPages.Deployment.dll
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\System.Web.WebPages.dll
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\System.Web.WebPages.Razor.dll
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\EntityFramework.xml
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\EntityFramework.SqlServer.xml
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\PagedList.xml
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\PagedList.Mvc.xml
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\System.Web.Helpers.xml
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\System.Web.Mvc.xml
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\System.Web.Razor.xml
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\System.Web.WebPages.xml
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\System.Web.WebPages.Deployment.xml
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\bin\System.Web.WebPages.Razor.xml
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\obj\Release\jojo.csprojResolveAssemblyReference.cache
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\obj\Release\jojo.dll
+C:\Users\ThachChiBao\Desktop\General\jojo2\jojo\jojo\obj\Release\jojo.pdb
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\jojo.dll.config
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\jojo.dll
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\jojo.pdb
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\EntityFramework.dll
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\EntityFramework.SqlServer.dll
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\PagedList.dll
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\PagedList.Mvc.dll
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\System.Web.Helpers.dll
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\System.Web.Mvc.dll
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\System.Web.Razor.dll
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\System.Web.WebPages.Deployment.dll
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\System.Web.WebPages.dll
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\System.Web.WebPages.Razor.dll
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\EntityFramework.xml
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\EntityFramework.SqlServer.xml
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\PagedList.xml
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\PagedList.Mvc.xml
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\System.Web.Helpers.xml
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\System.Web.Mvc.xml
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\System.Web.Razor.xml
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\System.Web.WebPages.xml
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\System.Web.WebPages.Deployment.xml
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\bin\System.Web.WebPages.Razor.xml
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\obj\Release\jojo.csprojResolveAssemblyReference.cache
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\obj\Release\jojo.dll
+C:\Users\ThachChiBao\Dropbox\new jojo\jojo2\jojo\jojo\obj\Release\jojo.pdb
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\jojo.dll.config
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\jojo.dll
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\jojo.pdb
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\EntityFramework.dll
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\EntityFramework.SqlServer.dll
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\PagedList.dll
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\PagedList.Mvc.dll
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\System.Web.Helpers.dll
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\System.Web.Mvc.dll
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\System.Web.Razor.dll
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\System.Web.WebPages.Deployment.dll
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\System.Web.WebPages.dll
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\System.Web.WebPages.Razor.dll
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\EntityFramework.xml
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\EntityFramework.SqlServer.xml
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\PagedList.xml
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\PagedList.Mvc.xml
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\System.Web.Helpers.xml
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\System.Web.Mvc.xml
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\System.Web.Razor.xml
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\System.Web.WebPages.xml
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\System.Web.WebPages.Deployment.xml
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\bin\System.Web.WebPages.Razor.xml
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\obj\Release\jojo.csprojResolveAssemblyReference.cache
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\obj\Release\jojo.dll
+C:\Users\BaoTC\Desktop\new jojo\jojo2\jojo\jojo\obj\Release\jojo.pdb

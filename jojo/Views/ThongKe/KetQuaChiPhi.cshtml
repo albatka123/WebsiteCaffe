@@ -1,0 +1,62 @@
+﻿@using Cafe.Models;@using Cafe.DTO;
+
+@{
+    Layout = null;
+    NhanVienDto nv = ViewBag.nhanvien as NhanVienDto;
+    List<TKChiPhi> list = ViewBag.chiphi as List<TKChiPhi>;
+    list = list.OrderByDescending(x => x.tongchiphi).ToList();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="~/image/caffe.ico">
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <title>ChiPhi</title>
+    <script>
+
+    </script>
+    <style>
+        .minheight {
+            min-height: 370px;
+        }
+    </style>
+</head>
+<body>
+    @RenderPage("/Views/Share/nav_quanly.cshtml")
+    <div class="container minheight">
+        <div class="row">
+            <h2 class="text-center text-primary">Kết quả thống kê chi phí</h2>
+            <h3>Từ ngày: @ViewBag.tungay</h3>
+            <h3>Tới ngày: @ViewBag.toingay</h3>
+            <h3>Tổng chi phí: @ViewBag.tongchiphi</h3>
+            <h3>Tổng doanh thu: @ViewBag.doanhthu</h3>
+            <h3 class="text-primary">=> Lợi nhuận: @ViewBag.loinhuan</h3>
+        </div>
+        <br />
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Loại chi phí</th>
+                        <th>Chi phí</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < list.Count; i++)
+                    {
+                        <tr>
+                            <td>@list[i].ten</td>
+                            <td>@list[i].tongchiphi</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @RenderPage("/Views/Share/footer.cshtml")
+</body>
+</html>
